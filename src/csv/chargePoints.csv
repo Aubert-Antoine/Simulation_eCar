@@ -1,0 +1,10 @@
+point_id ,number_of_outlets ,available_outlets ,city     ,address
+     524 ,                5 ,                5 ,Papho    ,"King of tombs, 55 "
+     525 ,               10 ,                1 ,Papho    ,"Agiou Georgiou, 2 "
+     526 ,                8 ,                5 ,Papho    ,Leontiou 7
+     527 ,               15 ,               10 ,Larnaca  ,Stasinou Street 51
+     528 ,                5 ,                2 ,Larnaca  ,Athalassis Street
+     529 ,               10 ,                8 ,Limassol ,Vyronos Street 3
+     530 ,               13 ,               10 ,Limassol ,Grigori Afxentiou Street 15
+     531 ,                9 ,                4 ,Nicosia  ,Agia Marina Xyliatou 8
+     532 ,               10 ,                5 ,Nicosia  ,Eleftherias Avenue 1
