@@ -22,12 +22,12 @@ public class Database implements DatabaseInterface{
 
         try {
             String sql ="CREATE TABLE Charging_Point " +
-                        "( point_id INTEGER NOT NULL " +
+                        "( point_id INTEGER NOT NULL, " +
                         " number_of_outlets INTEGER, " +
                         " available_outlets VARCHAR(255), " +
                         " city VARCHAR(255), " +
-                        " address VARCHAR(255))"+
-                        "PRIMARY KEY ( point_id )";
+                        " address VARCHAR(255), " +
+                        " PRIMARY KEY (point_id)) ";
             stmt.executeUpdate(sql);
             System.out.println("Table Charging_Point created");
         } catch (SQLException e) {
@@ -36,10 +36,10 @@ public class Database implements DatabaseInterface{
 
         try {
             String sql ="CREATE TABLE E_Car " +
-                        "(id_model INTEGER not NULL, " +
+                        "(model_id INTEGER not NULL, " +
                         " model VARCHAR(255), " +
                         " charging_speed VARCHAR(255), " +
-                        " releate_date TIMESTAMP, "+
+                        " release_date DATE, "+
                         "PRIMARY KEY ( model_id )";
             stmt.executeUpdate(sql);
             System.out.println("Table E_Car created");
@@ -55,9 +55,9 @@ public class Database implements DatabaseInterface{
                         " model_id INTEGER, " +
                         " car_color VARCHAR(255), " +
                         " car_battery_level INTEGER, " +
-                        " car_last_service TIMESTAMP, " +
-                        " total_millimetres INTEGER)"+
-                        "PRIMARY KEY ( customer_id )"+
+                        " car_last_service DATE, " +
+                        " total_millimetres INTEGER, "+
+                        "PRIMARY KEY ( customer_id ),"+
                         "FOREIGN KEY (model_id) REFERENCES E_Car(model_id)";
             stmt.executeUpdate(sql);
             System.out.println("Table Customer created");
@@ -72,15 +72,14 @@ public class Database implements DatabaseInterface{
                         " point_id INTEGER, " +
                         " starting_timestamp TIMESTAMP, " +
                         " fully_charge_timestamp TIMESTAMP, " +
-                        "PRIMARY KEY ( process_id, customer_id, point_id )"+
-                        "FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)"+
+                        "PRIMARY KEY ( process_id, customer_id, point_id ),"+
+                        "FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),"+
                         "FOREIGN KEY (point_id) REFERENCES Charging_Point(point_id)";
             stmt.executeUpdate(sql);
             System.out.println("Table Charging_Process created");
         } catch (SQLException e) {
             e.printStackTrace();
         }//catch
-
         conn.close();
     }//connectToDatabase()
 }
