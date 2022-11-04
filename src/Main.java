@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         System.out.println("Hello world!");
         Database db = new Database();
-        db.connectToDatabase();
+        //db.connectToDatabase();
+        db.readCSV("e-car", "c");
     }
 }
