@@ -1,9 +1,9 @@
 import java.sql.*;
 
 public class DBUtil {
-    static final String DB_URL = "jdbc:mysql://sql11.freesqldatabase.com/sql11525471";
-    static final String USER = "sql11525471";
-    static final String PASS = "hAGqzlm8RA";
+    static final String DB_URL = "jdbc:mysql://sql7.freesqldatabase.com/sql7542187";
+    static final String USER = "sql7542187";
+    static final String PASS = "FwRe9s8Cf1";
     static final String QUERY = "SELECT id, first, last, age FROM Employees";
 
     static final String QUERYINSERT = "INSERT INTO Employees VALUES (101, 18, 'Maria', 'TErzi');";
