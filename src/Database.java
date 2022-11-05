@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Database implements DatabaseInterface{
 
-    static final boolean debug = true;
+    static final boolean debug = false;
 
 
 
@@ -128,16 +128,16 @@ public class Database implements DatabaseInterface{
     }//currentDirectory
 
     /**
-     * writeInDatabase write in the pNameOfDatabase the content send by the fonction readCSV
+     * writeInDatabase write in the pNameOfDatabase the content send by the function readCSV
+     * There is 4 if because each database have not the same Type in row
      * @param pLines send by readCSV
-     * @param pNameOfDatabase the name of the database wich is filled
+     * @param pNameOfDatabase the name of the database which is filled
      */
     public void writeInDatabase(LinkedList pLines, String pNameOfDatabase) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         // Open a connection
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection conn = DriverManager.getConnection(Main.DB_URL, Main.USER, Main.PASS);
         Statement stmt = conn.createStatement();
-
 
         if(debug) {
             System.out.println("The seize of the LinkedList is : " + pLines.size());
@@ -146,16 +146,22 @@ public class Database implements DatabaseInterface{
             System.out.println(pLines.pollFirst());
         }
 
-         if(pNameOfDatabase.equals("E_Car")){
-             String[] lineContent = pLines.pollFirst().toString().split(",");
-             String sqlLine = "INSERT INTO E_Car VALUES (" + lineContent[0] +", '"+lineContent[1] + "', '" + lineContent[2] + "', '" + dateConverter(lineContent[3]) +"')";
-             System.out.println(dateConverter(lineContent[3]));
-             stmt.executeUpdate(sqlLine);
-         }
-         else{System.out.println("unknown name of database");}
+        String[][] listContent = new String[pLines.size()][];
+        int nbOfLine = pLines.size();      //ini here and not in the for because the value change due to the .poll which remove at each call
+        String sqlLine = "";
+        for (int i = 0; i <nbOfLine; i++){
+            listContent[i] = pLines.pollFirst().toString().split(",");
+            if(pNameOfDatabase.equals("E_Car")){
+                sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] +", '"+listContent[i][1] + "', '" + listContent[i][2] + "', '" + dateConverter(listContent[i][3]) +"')";
+            } else if (pNameOfDatabase.equals("Charging_Point")) {
 
+            } else if (pNameOfDatabase.equals("Customer")) {
 
+            } else if (pNameOfDatabase.equals("Charging_Process")) {
 
+            } else{System.out.println("unknown name of database");}
+        }
+        stmt.executeUpdate(sqlLine);
         conn.close();
     }//writeInDatabase
 
