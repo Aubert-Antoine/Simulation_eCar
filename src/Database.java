@@ -1,4 +1,4 @@
-import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 public class Database implements DatabaseInterface{
+
+    static final boolean debug = true;
 
 
     /**
@@ -90,21 +92,58 @@ public class Database implements DatabaseInterface{
     /**
      * readCSV read the content of the csv file given in param
      * THEN it fill the database associate
-     * @param pNameOfCSVFile the csv file name.csv
+     * @param pNameOfCSVFile the csv file name without '.csv'
      * @param pNameOfDatabase  the name of the database to fill
      */
     public void readCSV(String pNameOfCSVFile, String pNameOfDatabase){
         try {
-            Scanner scanner = new Scanner(System.in);
-            String DELIMITER = ",";     //maybe ";"
+            //join path to make an absolute path of data
+            Path globalPath = (Path)Paths.get(currentDirectory(), "src", "csv", pNameOfCSVFile+".csv");
+            Scanner scanner = new Scanner(globalPath);
+            String DELIMITER = ",";
             scanner.useDelimiter(DELIMITER);
 
-            while (scanner.hasNext()) {
-                System.out.print(scanner.next() + " ");
-            }//try
-        } catch (Exception ex) {
+            while (scanner.hasNextLine()){
+                String [] line = scanner.nextLine().split(DELIMITER);
+            }
+            //writeInDatabase(CSVLines, pNameOfDatabase);
+            scanner.close();
+        }catch (Exception ex) {
             ex.printStackTrace();
         }//catch
     }//readCSV
 
+
+    /**
+     * currentDirectory return the absolut path of the "Simulation eCar" project.
+     * @return
+     */
+    public String currentDirectory(){
+        return System.getProperty("user.dir");
+    }//currentDirectory
+
+    /**
+     * writeInDatabase write in the pNameOfDatabase the content send in pLines
+     * @param pLines
+     * @param pNameOfDatabase
+     */
+    public void writeInDatabase(String[] pLines, String pNameOfDatabase) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        // Open a connection
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(Main.DB_URL, Main.USER, Main.PASS);
+        Statement stmt = conn.createStatement();
+
+
+        if(debug){ System.out.println(pLines); }
+
+        try{
+            String sql = "INSERT INTO "+pNameOfDatabase+
+                    "VALUES ()";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        conn.close();
+    }//writeInDatabase
 }
+
