@@ -1,5 +1,5 @@
 "customer_id, full_name" ,                  ,car_registration_number ,model_id ,car_color ,car_battery_level ,car_last_service ,total_millimetres
-                  787878 ,Janelle Horne     ,BCD879                  ,   77671 ,black     ,               55 ,null             ,
+                  787878 ,Janelle Horne     ,BCD879                  ,   77671 ,black     ,               55 ,null													,
                   878787 ,Jakayla Perry     ,BCD880                  ,   77667 ,grey      ,               56 ,02/04/2022       ,
                   878788 ,Adyson Wilkerson  ,BCD881                  ,   44244 ,white     ,               57 ,null             ,
                   878789 ,Micah Camacho     ,BCD882                  ,   88246 ,grey      ,               58 ,01/09/2022       ,

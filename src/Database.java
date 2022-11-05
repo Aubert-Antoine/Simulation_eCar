@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -11,7 +13,7 @@ import java.util.Scanner;
 
 public class Database implements DatabaseInterface{
 
-    static final boolean debug = false;
+    static final boolean debug = true;
 
 
 
@@ -133,35 +135,30 @@ public class Database implements DatabaseInterface{
      * @param pLines send by readCSV
      * @param pNameOfDatabase the name of the database which is filled
      */
-    public void writeInDatabase(LinkedList pLines, String pNameOfDatabase) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    public void writeInDatabase(@NotNull LinkedList pLines, String pNameOfDatabase) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         // Open a connection
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection conn = DriverManager.getConnection(Main.DB_URL, Main.USER, Main.PASS);
         Statement stmt = conn.createStatement();
 
-        if(debug) {
-            System.out.println("The seize of the LinkedList is : " + pLines.size());
-            System.out.println(pLines.pollFirst());
-            System.out.println(pLines.pollFirst());
-            System.out.println(pLines.pollFirst());
-        }
-
         String[][] listContent = new String[pLines.size()][];
         int nbOfLine = pLines.size();      //ini here and not in the for because the value change due to the .poll which remove at each call
         String sqlLine = "";
+        if(debug) System.out.println(nbOfLine + " le nb de ligne");
         for (int i = 0; i <nbOfLine; i++){
             listContent[i] = pLines.pollFirst().toString().split(",");
+            if(debug) System.out.println(listContent[i]);
             if(pNameOfDatabase.equals("E_Car")){
-                sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] +", '"+listContent[i][1] + "', '" + listContent[i][2] + "', '" + dateConverter(listContent[i][3]) +"')";
+                //sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] +", '"+listContent[i][1] + "', '" + listContent[i][2] + "', '" + dateConverter(listContent[i][3]) +"')";
             } else if (pNameOfDatabase.equals("Charging_Point")) {
-
+                //sqlLine = "INSERT INTO Charging_Point VALUES (" + listContent[i][0] +", "+listContent[i][1] + ", " + listContent[i][2] + ", '" + listContent[i][3] +"', '"+ listContent[i][4] +"')";
             } else if (pNameOfDatabase.equals("Customer")) {
-
+                sqlLine = "INSERT INTO Customer VALUES (" + listContent[i][0] +", '"+listContent[i][1] + "', '" + listContent[i][2] + "', " + listContent[i][3] +",'" + listContent[i][4] +"'," + listContent[i][5] + ", '" + dateConverter(listContent[i][6]) + "'," + /*listContent[i][7]*/ 1 + ")";
             } else if (pNameOfDatabase.equals("Charging_Process")) {
-
+                //sqlLine = "INSERT INTO Charging_Process VALUES (" + listContent[i][0] +", "+listContent[i][1] + ", " + listContent[i][2] + ", '" + listContent[i][3] + "', '" + listContent[i][4] + "')";
             } else{System.out.println("unknown name of database");}
-        }
-        stmt.executeUpdate(sqlLine);
+            stmt.executeUpdate(sqlLine);
+        }//for
         conn.close();
     }//writeInDatabase
 
@@ -172,12 +169,21 @@ public class Database implements DatabaseInterface{
      * @param pDate the date at java.sql.date format -> notice that the result is the same with String format
      * @return
      */
-    public java.sql.Date dateConverter(String pDate){
-        java.util.Date date = new Date(pDate);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.sql.Date format = java.sql.Date.valueOf(formatter.format(date));
-        System.out.println(format);
-        return format;
-    }
-}
+    public String dateConverter(String pDate){
+        if(debug) System.out.println(pDate + " est ce egal a 'null' : "+pDate.contains("null"));
+        if(pDate.contains("null")){
+            if(debug) System.out.println("null catch");
+            return pDate;
+        }else {
+            java.util.Date date = new Date(pDate);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String format = formatter.format(date);
+
+            if (debug) System.out.println(format);
+
+            return format;
+        }
+    }//dateConverter()
+
+}//class
 

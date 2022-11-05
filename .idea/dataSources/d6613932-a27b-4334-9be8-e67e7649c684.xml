@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="sql7542187">
+<dataSource name="sql7545214">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.43">
     <root id="1">
       <DefaultCasing>exact</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
       <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
-      <Grants>sql7542187|schema||sql7542187||ALTER|G
-sql7542187|schema||sql7542187||ALTER ROUTINE|G
-sql7542187|schema||sql7542187||CREATE|G
-sql7542187|schema||sql7542187||CREATE ROUTINE|G
-sql7542187|schema||sql7542187||CREATE VIEW|G
-sql7542187|schema||sql7542187||DELETE|G
-sql7542187|schema||sql7542187||DROP|G
-sql7542187|schema||sql7542187||EXECUTE|G
-sql7542187|schema||sql7542187||INDEX|G
-sql7542187|schema||sql7542187||INSERT|G
-sql7542187|schema||sql7542187||LOCK TABLES|G
-sql7542187|schema||sql7542187||SELECT|G
-sql7542187|schema||sql7542187||SHOW VIEW|G
-sql7542187|schema||sql7542187||UPDATE|G</Grants>
+      <Grants>sql7545214|schema||sql7545214||ALTER|G
+sql7545214|schema||sql7545214||ALTER ROUTINE|G
+sql7545214|schema||sql7545214||CREATE|G
+sql7545214|schema||sql7545214||CREATE ROUTINE|G
+sql7545214|schema||sql7545214||CREATE VIEW|G
+sql7545214|schema||sql7545214||DELETE|G
+sql7545214|schema||sql7545214||DROP|G
+sql7545214|schema||sql7545214||EXECUTE|G
+sql7545214|schema||sql7545214||INDEX|G
+sql7545214|schema||sql7545214||INSERT|G
+sql7545214|schema||sql7545214||LOCK TABLES|G
+sql7545214|schema||sql7545214||SELECT|G
+sql7545214|schema||sql7545214||SHOW VIEW|G
+sql7545214|schema||sql7545214||UPDATE|G</Grants>
       <ServerVersion>5.5.62</ServerVersion>
     </root>
     <collation id="2" parent="1" name="armscii8_bin">
@@ -654,196 +654,10 @@ sql7542187|schema||sql7542187||UPDATE|G</Grants>
     <schema id="199" parent="1" name="information_schema">
       <CollationName>utf8_general_ci</CollationName>
     </schema>
-    <schema id="200" parent="1" name="sql7542187">
+    <schema id="200" parent="1" name="sql7545214">
       <Current>1</Current>
       <CollationName>latin1_swedish_ci</CollationName>
     </schema>
-    <user id="201" parent="1" name="sql7542187"/>
-    <table id="202" parent="200" name="Charging_Point">
-      <Engine>InnoDB</Engine>
-      <CollationName>latin1_swedish_ci</CollationName>
-    </table>
-    <table id="203" parent="200" name="Charging_Process">
-      <Engine>InnoDB</Engine>
-      <CollationName>latin1_swedish_ci</CollationName>
-    </table>
-    <table id="204" parent="200" name="Customer">
-      <Engine>InnoDB</Engine>
-      <CollationName>latin1_swedish_ci</CollationName>
-    </table>
-    <table id="205" parent="200" name="E_Car">
-      <Engine>InnoDB</Engine>
-      <CollationName>latin1_swedish_ci</CollationName>
-    </table>
-    <column id="206" parent="202" name="point_id">
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="207" parent="202" name="number_of_outlets">
-      <DataType>int(11)|0s</DataType>
-      <Position>2</Position>
-    </column>
-    <column id="208" parent="202" name="available_outlets">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>3</Position>
-    </column>
-    <column id="209" parent="202" name="city">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>4</Position>
-    </column>
-    <column id="210" parent="202" name="address">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>5</Position>
-    </column>
-    <index id="211" parent="202" name="PRIMARY">
-      <ColNames>point_id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="212" parent="202" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="213" parent="203" name="process_id">
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="214" parent="203" name="customer_id">
-      <DataType>int(11)|0s</DataType>
-      <DefaultExpression>0</DefaultExpression>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="215" parent="203" name="point_id">
-      <DataType>int(11)|0s</DataType>
-      <DefaultExpression>0</DefaultExpression>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <column id="216" parent="203" name="starting_timestamp">
-      <DataType>timestamp|0s</DataType>
-      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
-      <NotNull>1</NotNull>
-      <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
-      <Position>4</Position>
-    </column>
-    <column id="217" parent="203" name="fully_charge_timestamp">
-      <DataType>timestamp|0s</DataType>
-      <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
-      <NotNull>1</NotNull>
-      <Position>5</Position>
-    </column>
-    <foreign-key id="218" parent="203" name="Charging_Process_ibfk_1">
-      <ColNames>customer_id</ColNames>
-      <RefColNames>customer_id</RefColNames>
-      <RefTableName>Customer</RefTableName>
-    </foreign-key>
-    <foreign-key id="219" parent="203" name="Charging_Process_ibfk_2">
-      <ColNames>point_id</ColNames>
-      <RefColNames>point_id</RefColNames>
-      <RefTableName>Charging_Point</RefTableName>
-    </foreign-key>
-    <index id="220" parent="203" name="PRIMARY">
-      <ColNames>process_id
-customer_id
-point_id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="221" parent="203" name="customer_id">
-      <ColNames>customer_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="222" parent="203" name="point_id">
-      <ColNames>point_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="223" parent="203" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="224" parent="204" name="customer_id">
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="225" parent="204" name="full_name">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>2</Position>
-    </column>
-    <column id="226" parent="204" name="car_registration_number">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>3</Position>
-    </column>
-    <column id="227" parent="204" name="model_id">
-      <DataType>int(11)|0s</DataType>
-      <Position>4</Position>
-    </column>
-    <column id="228" parent="204" name="car_color">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>5</Position>
-    </column>
-    <column id="229" parent="204" name="car_battery_level">
-      <DataType>int(11)|0s</DataType>
-      <Position>6</Position>
-    </column>
-    <column id="230" parent="204" name="car_last_service">
-      <DataType>date|0s</DataType>
-      <Position>7</Position>
-    </column>
-    <column id="231" parent="204" name="total_millimetres">
-      <DataType>int(11)|0s</DataType>
-      <Position>8</Position>
-    </column>
-    <foreign-key id="232" parent="204" name="Customer_ibfk_1">
-      <ColNames>model_id</ColNames>
-      <RefColNames>model_id</RefColNames>
-      <RefTableName>E_Car</RefTableName>
-    </foreign-key>
-    <index id="233" parent="204" name="PRIMARY">
-      <ColNames>customer_id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="234" parent="204" name="model_id">
-      <ColNames>model_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="235" parent="204" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="236" parent="205" name="model_id">
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="237" parent="205" name="model">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>2</Position>
-    </column>
-    <column id="238" parent="205" name="charging_speed">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>3</Position>
-    </column>
-    <column id="239" parent="205" name="release_date">
-      <DataType>date|0s</DataType>
-      <Position>4</Position>
-    </column>
-    <index id="240" parent="205" name="PRIMARY">
-      <ColNames>model_id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="241" parent="205" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
+    <user id="201" parent="1" name="sql7545214"/>
   </database-model>
 </dataSource>
