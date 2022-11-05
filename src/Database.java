@@ -4,11 +4,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Database implements DatabaseInterface{
 
     static final boolean debug = true;
+
 
 
     /**
@@ -90,12 +94,11 @@ public class Database implements DatabaseInterface{
 
 
     /**
-     * readCSV read the content of the csv file given in param
-     * THEN it fill the database associate
+     * readCSV read the csv file give in param via a scanner
      * @param pNameOfCSVFile the csv file name without '.csv'
-     * @param pNameOfDatabase  the name of the database to fill
+     * @return a LinkedList with all lines via String format
      */
-    public void readCSV(String pNameOfCSVFile, String pNameOfDatabase){
+    public LinkedList readCSV(String pNameOfCSVFile){
         try {
             //join path to make an absolute path of data
             Path globalPath = (Path)Paths.get(currentDirectory(), "src", "csv", pNameOfCSVFile+".csv");
@@ -103,14 +106,16 @@ public class Database implements DatabaseInterface{
             String DELIMITER = ",";
             scanner.useDelimiter(DELIMITER);
 
-            while (scanner.hasNextLine()){
-                String [] line = scanner.nextLine().split(DELIMITER);
-            }
-            //writeInDatabase(CSVLines, pNameOfDatabase);
+            scanner.nextLine(); //read the first line useless
+
+            LinkedList CSVLines = new LinkedList();
+            while (scanner.hasNextLine()){CSVLines.add(scanner.nextLine());}
             scanner.close();
+            return CSVLines;
         }catch (Exception ex) {
             ex.printStackTrace();
         }//catch
+        return null;
     }//readCSV
 
 
@@ -123,27 +128,50 @@ public class Database implements DatabaseInterface{
     }//currentDirectory
 
     /**
-     * writeInDatabase write in the pNameOfDatabase the content send in pLines
-     * @param pLines
-     * @param pNameOfDatabase
+     * writeInDatabase write in the pNameOfDatabase the content send by the fonction readCSV
+     * @param pLines send by readCSV
+     * @param pNameOfDatabase the name of the database wich is filled
      */
-    public void writeInDatabase(String[] pLines, String pNameOfDatabase) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    public void writeInDatabase(LinkedList pLines, String pNameOfDatabase) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         // Open a connection
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection conn = DriverManager.getConnection(Main.DB_URL, Main.USER, Main.PASS);
         Statement stmt = conn.createStatement();
 
 
-        if(debug){ System.out.println(pLines); }
-
-        try{
-            String sql = "INSERT INTO "+pNameOfDatabase+
-                    "VALUES ()";
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if(debug) {
+            System.out.println("The seize of the LinkedList is : " + pLines.size());
+            System.out.println(pLines.pollFirst());
+            System.out.println(pLines.pollFirst());
+            System.out.println(pLines.pollFirst());
         }
+
+         if(pNameOfDatabase.equals("E_Car")){
+             String[] lineContent = pLines.pollFirst().toString().split(",");
+             String sqlLine = "INSERT INTO E_Car VALUES (" + lineContent[0] +", '"+lineContent[1] + "', '" + lineContent[2] + "', '" + dateConverter(lineContent[3]) +"')";
+             System.out.println(dateConverter(lineContent[3]));
+             stmt.executeUpdate(sqlLine);
+         }
+         else{System.out.println("unknown name of database");}
+
+
 
         conn.close();
     }//writeInDatabase
+
+    /**
+     * convert the date dd/mm/yyyy to yyyy-mm-dd
+     * https://stackoverflow.com/a/14039210
+     * @author Antoine Aubert & stackoverflow
+     * @param pDate the date at java.sql.date format -> notice that the result is the same with String format
+     * @return
+     */
+    public java.sql.Date dateConverter(String pDate){
+        java.util.Date date = new Date(pDate);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Date format = java.sql.Date.valueOf(formatter.format(date));
+        System.out.println(format);
+        return format;
+    }
 }
 

@@ -1,1 +1,0 @@
-DAns main changer pour ne pas apl readCSV mais pour apl writeInDatabase => faire retourner un tableau de string

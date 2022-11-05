@@ -10,6 +10,6 @@ public class Main {
         System.out.println("Hello world!");
         Database db = new Database();
         //db.connectToDatabase();
-        db.readCSV("e-cars", "c");
+        db.writeInDatabase(db.readCSV("e-cars"), "E_Car");
     }
 }
