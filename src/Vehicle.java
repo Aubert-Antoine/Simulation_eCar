@@ -1,11 +1,16 @@
 public class Vehicle implements VehicleInterface{
 
-    private int numberOfPassengers=0;
-    private int manufactureYear=0;
-    private double price=0.0;
-    private String brand="";
+    private int numberOfPassengers;
+    private int manufactureYear;
+    private double price;
+    private String brand;
 
-    public Vehicle(){}
+    public Vehicle(){
+        this.numberOfPassengers = 5;
+        this.manufactureYear = 2015;
+        this.price = 25000;
+        this.brand = "superCarBrand";
+    }
 
     public Vehicle(int pNumberOfPassengers, int pManufactureYear, double pPrice, String pBrand){
         this.numberOfPassengers = pNumberOfPassengers;

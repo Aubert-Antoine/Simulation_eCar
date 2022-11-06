@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="New database">
-      <change afterPath="$PROJECT_DIR$/src/Car.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ElectricCar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Vehicle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/VehicleInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d6613932-a27b-4334-9be8-e67e7649c684.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/d6613932-a27b-4334-9be8-e67e7649c684.xml" afterDir="false" />
+    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="New class Vehicle &amp; Car &amp; ECAr">
+      <change afterPath="$PROJECT_DIR$/src/ECarsCompany.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/EchargingPoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ElectricCar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ElectricCar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/note.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/note.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csv/chargePoints.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/chargePoints.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csv/chargingProcess.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/chargingProcess.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +33,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2H62oOAoV69CwEhlIi36Raxyh5y" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -73,6 +72,20 @@
       <command value="main" />
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Simulation eCar" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -83,7 +96,8 @@
       <updated>1667591389338</updated>
       <workItem from="1667591390902" duration="10170000" />
       <workItem from="1667646391990" duration="20420000" />
-      <workItem from="1667683107659" duration="9627000" />
+      <workItem from="1667683107659" duration="9689000" />
+      <workItem from="1667724637767" duration="28485000" />
     </task>
     <task id="LOCAL-00001" summary=".csv &amp; .pdf &amp; .jar &amp; DBUtil.java">
       <created>1667591884043</created>
@@ -155,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667684119528</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="New class Vehicle &amp; Car &amp; ECAr">
+      <created>1667693762732</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1667693762732</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,7 +204,8 @@
     <MESSAGE value="readCSV in progress #3 ok &#10;writeindatabasein progress #1" />
     <MESSAGE value="writeindatabasein progress #2 4if" />
     <MESSAGE value="New database" />
-    <option name="LAST_COMMIT_MESSAGE" value="New database" />
+    <MESSAGE value="New class Vehicle &amp; Car &amp; ECAr" />
+    <option name="LAST_COMMIT_MESSAGE" value="New class Vehicle &amp; Car &amp; ECAr" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -198,5 +220,8 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Simulation_eCar$Main.ic" NAME="Main Coverage Results" MODIFIED="1667738538776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

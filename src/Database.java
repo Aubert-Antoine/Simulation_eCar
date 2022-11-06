@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Database implements DatabaseInterface{
 
     static final boolean debug = true;
+    static final String defaultValueOfTimestamp = "1000/00/00/00/00/00";
 
 
 
@@ -32,7 +33,7 @@ public class Database implements DatabaseInterface{
             String sql ="CREATE TABLE Charging_Point " +
                         "( point_id INTEGER NOT NULL, " +
                         " number_of_outlets INTEGER, " +
-                        " available_outlets VARCHAR(255), " +
+                        " available_outlets INTEGER, " +
                         " city VARCHAR(255), " +
                         " address VARCHAR(255), " +
                         " PRIMARY KEY (point_id)) ";
@@ -78,8 +79,8 @@ public class Database implements DatabaseInterface{
                         "(process_id INTEGER not NULL, " +
                         " customer_id INTEGER, " +
                         " point_id INTEGER, " +
-                        " starting_timestamp TIMESTAMP, " +
-                        " fully_charge_timestamp TIMESTAMP, " +
+                        " starting_timestamp DATETIME, " +
+                        " fully_charge_timestamp DATETIME, " +
                         "PRIMARY KEY ( process_id, customer_id, point_id ),"+
                         "FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),"+
                         "FOREIGN KEY (point_id) REFERENCES Charging_Point(point_id))";
@@ -126,13 +127,17 @@ public class Database implements DatabaseInterface{
         return System.getProperty("user.dir");
     }//currentDirectory
 
+
+
     /**
      * writeInDatabase write in the pNameOfDatabase the content send by the function readCSV
      * There is 4 if because each database have not the same Type in row
      * @param pLines send by readCSV
      * @param pNameOfDatabase the name of the database which is filled
      */
-    public void writeInDatabase(@NotNull LinkedList pLines, String pNameOfDatabase) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    public void writeInDatabase(@NotNull LinkedList pLines, String pNameOfDatabase)
+            throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+
         // Open a connection
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection conn = DriverManager.getConnection(Main.DB_URL, Main.USER, Main.PASS);
@@ -141,18 +146,29 @@ public class Database implements DatabaseInterface{
         String[][] listContent = new String[pLines.size()][];
         int nbOfLine = pLines.size();      //ini here and not in the for because the value change due to the .poll which remove at each call
         String sqlLine = "";
-        if(debug) System.out.println(nbOfLine + " le nb de ligne");
+
         for (int i = 0; i <nbOfLine; i++){
+            System.out.println("le i = "+i);
             listContent[i] = pLines.pollFirst().toString().split(",");
-            if(debug) System.out.println(listContent[i]);
+
+            if(debug) {
+                System.out.println("time 1 " + listContent[i][3]);
+                System.out.println("time 2 " + listContent[i][4]);
+            }
+
             if(pNameOfDatabase.equals("E_Car")){
-                sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] +", '"+listContent[i][1] + "', '" + listContent[i][2] + "', '" + dateConverter(listContent[i][3]) +"')";
+                sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] +", '"+listContent[i][1] + "', '" + listContent[i][2] + "', " + dateConverter(listContent[i][3]) +")";
             } else if (pNameOfDatabase.equals("Charging_Point")) {
                 sqlLine = "INSERT INTO Charging_Point VALUES (" + listContent[i][0] +", "+listContent[i][1] + ", " + listContent[i][2] + ", '" + listContent[i][3] +"', '"+ listContent[i][4] +"')";
             } else if (pNameOfDatabase.equals("Customer")) {
-                sqlLine = "INSERT INTO Customer VALUES (" + listContent[i][0] +", '"+listContent[i][1] + "', '" + listContent[i][2] + "', " + listContent[i][3] +",'" + listContent[i][4] +"'," + listContent[i][5] + ", " + dateConverter(listContent[i][6]) + "," + /*listContent[i][7]*/ 1 + ")";
+                sqlLine = "INSERT INTO Customer VALUES (" + listContent[i][0] +", '"+listContent[i][1] + "', '" + listContent[i][2] + "', " + listContent[i][3] +",'" + listContent[i][4] +"'," + listContent[i][5] + ", " + dateConverter(listContent[i][6]) + "," + /*listContent[i][7]*/ -1 + ")";
             } else if (pNameOfDatabase.equals("Charging_Process")) {
-                sqlLine = "INSERT INTO Charging_Process VALUES (" + listContent[i][0] +", "+listContent[i][1] + ", " + listContent[i][2] + "," + /*timeStampConverter(listContent[i][3])*/ '23/10/2022 21:05:69' + ", '" + "23/10/2022/21:05:69"/*timeStampConverter(listContent[i][4])*/ + "')";
+                try{
+                    sqlLine = "INSERT INTO Charging_Process VALUES (" + listContent[i][0] +", "+listContent[i][1] + ", " + listContent[i][2] + "," + timeStampConverter(listContent[i][3]) + "," + timeStampConverter(listContent[i][4]) + ")";
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
             } else{System.out.println("unknown name of database");}
             stmt.executeUpdate(sqlLine);
         }//for
@@ -167,16 +183,12 @@ public class Database implements DatabaseInterface{
      * @return
      */
     public String dateConverter(String pDate){
-        if(debug) System.out.println(pDate + " est ce egal a 'null' : "+pDate.contains("null"));
         if(pDate.contains("null")){
-            if(debug) System.out.println("null catch");
             return null;
         }else {
             java.util.Date date = new Date(pDate);
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String format = formatter.format(date);
-
-            if (debug) System.out.println(format);
 
             return "'"+format+"'"; // fix the bug due to null don't need quote but values need inside sql requests
         }
@@ -184,14 +196,14 @@ public class Database implements DatabaseInterface{
 
 
     public String timeStampConverter(String pTimeStamp){
-        if(pTimeStamp.contains("null")){
-            System.out.println("content null ? "+pTimeStamp.contains("null"));
-            return null;
-        }else{
-            return "'"+"23/10/2022.21:05:69"+"'";
-//            return "'"+pTimeStamp+"'"; //add quote for sql request
-        }
+        System.out.println("time stamp in param "+pTimeStamp);
 
-    }//timeStampConverter
+        if(pTimeStamp.getClass().equals(String.class)){
+            return pTimeStamp;
+        }else {
+            return null;
+        }
+    }//timeStampConverter(.)
+
 }//class
 

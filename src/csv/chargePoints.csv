@@ -1,4 +1,4 @@
-point_id ,number_of_outlets ,available_outlets ,city     ,address
+point_id ,number_of_outlets ,availableOutlets ,city     ,address
      524 ,                5 ,                5 ,Papho    ,"King of tombs, 55 "
      525 ,               10 ,                1 ,Papho    ,"Agiou Georgiou, 2 "
      526 ,                8 ,                5 ,Papho    ,Leontiou 7
