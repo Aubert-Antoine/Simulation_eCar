@@ -2,10 +2,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -149,13 +146,13 @@ public class Database implements DatabaseInterface{
             listContent[i] = pLines.pollFirst().toString().split(",");
             if(debug) System.out.println(listContent[i]);
             if(pNameOfDatabase.equals("E_Car")){
-                //sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] +", '"+listContent[i][1] + "', '" + listContent[i][2] + "', '" + dateConverter(listContent[i][3]) +"')";
+                sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] +", '"+listContent[i][1] + "', '" + listContent[i][2] + "', '" + dateConverter(listContent[i][3]) +"')";
             } else if (pNameOfDatabase.equals("Charging_Point")) {
-                //sqlLine = "INSERT INTO Charging_Point VALUES (" + listContent[i][0] +", "+listContent[i][1] + ", " + listContent[i][2] + ", '" + listContent[i][3] +"', '"+ listContent[i][4] +"')";
+                sqlLine = "INSERT INTO Charging_Point VALUES (" + listContent[i][0] +", "+listContent[i][1] + ", " + listContent[i][2] + ", '" + listContent[i][3] +"', '"+ listContent[i][4] +"')";
             } else if (pNameOfDatabase.equals("Customer")) {
-                sqlLine = "INSERT INTO Customer VALUES (" + listContent[i][0] +", '"+listContent[i][1] + "', '" + listContent[i][2] + "', " + listContent[i][3] +",'" + listContent[i][4] +"'," + listContent[i][5] + ", '" + dateConverter(listContent[i][6]) + "'," + /*listContent[i][7]*/ 1 + ")";
+                sqlLine = "INSERT INTO Customer VALUES (" + listContent[i][0] +", '"+listContent[i][1] + "', '" + listContent[i][2] + "', " + listContent[i][3] +",'" + listContent[i][4] +"'," + listContent[i][5] + ", " + dateConverter(listContent[i][6]) + "," + /*listContent[i][7]*/ 1 + ")";
             } else if (pNameOfDatabase.equals("Charging_Process")) {
-                //sqlLine = "INSERT INTO Charging_Process VALUES (" + listContent[i][0] +", "+listContent[i][1] + ", " + listContent[i][2] + ", '" + listContent[i][3] + "', '" + listContent[i][4] + "')";
+                sqlLine = "INSERT INTO Charging_Process VALUES (" + listContent[i][0] +", "+listContent[i][1] + ", " + listContent[i][2] + "," + /*timeStampConverter(listContent[i][3])*/ '23/10/2022 21:05:69' + ", '" + "23/10/2022/21:05:69"/*timeStampConverter(listContent[i][4])*/ + "')";
             } else{System.out.println("unknown name of database");}
             stmt.executeUpdate(sqlLine);
         }//for
@@ -173,7 +170,7 @@ public class Database implements DatabaseInterface{
         if(debug) System.out.println(pDate + " est ce egal a 'null' : "+pDate.contains("null"));
         if(pDate.contains("null")){
             if(debug) System.out.println("null catch");
-            return pDate;
+            return null;
         }else {
             java.util.Date date = new Date(pDate);
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -181,9 +178,20 @@ public class Database implements DatabaseInterface{
 
             if (debug) System.out.println(format);
 
-            return format;
+            return "'"+format+"'"; // fix the bug due to null don't need quote but values need inside sql requests
         }
     }//dateConverter()
 
+
+    public String timeStampConverter(String pTimeStamp){
+        if(pTimeStamp.contains("null")){
+            System.out.println("content null ? "+pTimeStamp.contains("null"));
+            return null;
+        }else{
+            return "'"+"23/10/2022.21:05:69"+"'";
+//            return "'"+pTimeStamp+"'"; //add quote for sql request
+        }
+
+    }//timeStampConverter
 }//class
 

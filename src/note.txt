@@ -1,0 +1,2 @@
+Customer database has 1 by default
+Charging process Time Stamps bug

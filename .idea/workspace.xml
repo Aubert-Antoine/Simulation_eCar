@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="writeindatabasein progress #2 4if">
+    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="New database">
+      <change afterPath="$PROJECT_DIR$/src/Car.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ElectricCar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Vehicle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/VehicleInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/d6613932-a27b-4334-9be8-e67e7649c684.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/d6613932-a27b-4334-9be8-e67e7649c684.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulation eCar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Simulation eCar.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csv/customer.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/customer.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/note.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/note.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +32,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2H62oOAoV69CwEhlIi36Raxyh5y" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -75,7 +83,7 @@
       <updated>1667591389338</updated>
       <workItem from="1667591390902" duration="10170000" />
       <workItem from="1667646391990" duration="20420000" />
-      <workItem from="1667683107659" duration="949000" />
+      <workItem from="1667683107659" duration="9627000" />
     </task>
     <task id="LOCAL-00001" summary=".csv &amp; .pdf &amp; .jar &amp; DBUtil.java">
       <created>1667591884043</created>
@@ -140,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667675949189</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="New database">
+      <created>1667684119528</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1667684119528</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,7 +182,8 @@
     <MESSAGE value="readCSV in progress #2 &#10;prb tableau" />
     <MESSAGE value="readCSV in progress #3 ok &#10;writeindatabasein progress #1" />
     <MESSAGE value="writeindatabasein progress #2 4if" />
-    <option name="LAST_COMMIT_MESSAGE" value="writeindatabasein progress #2 4if" />
+    <MESSAGE value="New database" />
+    <option name="LAST_COMMIT_MESSAGE" value="New database" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
