@@ -13,10 +13,11 @@ public class Main {
         db.connectToDatabase();
 //        db.writeInDatabase(db.readCSV("e-cars"), "E_Car");
 //        db.writeInDatabase(db.readCSV("chargePoints"), "Charging_Point");
-//        db.writeInDatabase(db.readCSV("customer"), "Customer");
+//        db.writeInDatabase(db.readCSV("customer"), "Customer");   //mercha pas car null
         db.writeInDatabase(db.readCSV("chargingProcess"), "Charging_Process");
+        //marche pas car y a un cas de null
 
-        EchargingPoint EP = new EchargingPoint();
+        EChargingPoint EP = new EChargingPoint();
 //        int i = EP.queryDatabase("SELECT starting_timestamp FROM Charging_Process WHERE Point_id = "+ 526);
 //        System.out.println(i);
 

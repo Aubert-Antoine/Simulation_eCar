@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class EchargingPoint {
+public class EChargingPoint {
 
     private int point_id;
     private int number_of_outlets;
@@ -8,21 +8,7 @@ public class EchargingPoint {
     private String city;
     private String address;
 
-//    public EchargingPoint(){
-//        this.point_id = 0;
-//        this.number_of_outlets =0;
-//        this.availableOutlets = 0;
-//        this.city = "";
-//        this.address = "";
-//    }
-//
-//    public EchargingPoint(int pPoint_id, int pNumber_of_outlets, int pAvailableOutlets, String pCity, String pAddress){
-//        this.point_id = pPoint_id;
-//        this.number_of_outlets = pNumber_of_outlets;
-//        this.availableOutlets = pAvailableOutlets;
-//        this.city = pCity;
-//        this.address = pAddress;
-//    }
+
 
     public int getAvailableOutlets() {
         return availableOutlets;
@@ -33,10 +19,19 @@ public class EchargingPoint {
      * @param pCustomer
      * @param pPointID
      */
-    public void startCharging(Customer pCustomer, int pPointID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {       // pPointID = point_id ?
+    public void startCharging(Customer pCustomer, int pPointID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        //Print the beginning of charging -> query
         String SQLQBeginningCharging = "SELECT starting_timestamp FROM Charging_Process WHERE point_id = "+pPointID;
         System.out.println(queryDatabase(SQLQBeginningCharging));
-    }
+
+        //Update the database => remove 1 slot of available outlet -> update
+        String SQLUAvailableOutlets = "UPDATE Charging_Point SET available_outlets = available_outlets-1 WHERE point_id = "+pPointID;
+        updateDatabase(SQLUAvailableOutlets);
+
+        // insert a new record => change the starting_timestamp -> Update
+        String SQLUNewRecord = "";
+        updateDatabase(SQLUNewRecord);
+    }//startCharging
 
     /**
      * make a request to the mysql database and return the result
@@ -47,6 +42,7 @@ public class EchargingPoint {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection conn = DriverManager.getConnection(Main.DB_URL, Main.USER, Main.PASS);
         Statement stmt = conn.createStatement();
+
         ResultSet outResultSet = null;
         String[] outResultString;
         int pID = 0;
@@ -67,6 +63,14 @@ public class EchargingPoint {
         return pID;
     }//queryDatabase(.)
 
+    /**
+     * Update the database
+     * @param pUpdate
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     */
     public void updateDatabase(String pUpdate) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection conn = DriverManager.getConnection(Main.DB_URL, Main.USER, Main.PASS);
@@ -78,11 +82,21 @@ public class EchargingPoint {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         conn.close();
-    }
+    }//updateDatabase
 
-    public void finishCharging(Customer customer){
+    public void finishCharging(Customer customer) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        //check if a customer has his car at a charging point : The date of starting_timestamp > fully_charge_timestamp => is charging -> Queries
+        String SQLQStartChargingTimeCar = "";
+        String SQLQEndChargingTimeCar = "";
 
-    }
+//        SQLQStartChargingTimeCar>SQLQEndChargingTimeCar = charge
+        if(date1.compareTo(date2) > 0){
+            System.out.println("The car is charging");
+        }
+
+        //replace null value to the current dateTime in field fully-charge_timestamp
+        String SQLUReplaceValues = "";
+        updateDatabase(SQLUReplaceValues);
+    }//finishCharging
 }

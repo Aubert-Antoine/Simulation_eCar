@@ -1,2 +1,8 @@
 Customer database has 1 by default
 Charging process Time Stamps bug
+
+
+Q 5.a juste un getter ?
+Q 5.b juste faire available -1 ?
+G 5.c ?? add a new record or change it values ? --> update Starting timeStamp
+
