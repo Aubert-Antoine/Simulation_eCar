@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="Q 6 in progress">
+    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="Q 6 done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ECarsCompany.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECarsCompany.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EChargingPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EChargingPoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/note.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/note.txt" afterDir="false" />
     </list>
@@ -93,7 +94,7 @@
       <workItem from="1667646391990" duration="20420000" />
       <workItem from="1667683107659" duration="9689000" />
       <workItem from="1667724637767" duration="34457000" />
-      <workItem from="1667805297770" duration="2809000" />
+      <workItem from="1667805297770" duration="13863000" />
     </task>
     <task id="LOCAL-00001" summary=".csv &amp; .pdf &amp; .jar &amp; DBUtil.java">
       <created>1667591884043</created>
@@ -186,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667774721960</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Q 6 done">
+      <created>1667808257355</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1667808257355</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,7 +225,8 @@
     <MESSAGE value="New class Vehicle &amp; Car &amp; ECAr" />
     <MESSAGE value="compilation ok jusqua Q5" />
     <MESSAGE value="Q 6 in progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="Q 6 in progress" />
+    <MESSAGE value="Q 6 done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Q 6 done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -230,10 +239,14 @@
           <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
           <option name="timeStamp" value="4" />
         </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.util.NoSuchElementException" package="java.util" />
+          <option name="timeStamp" value="6" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Simulation_eCar$Main.ic" NAME="Main Coverage Results" MODIFIED="1667738538776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Simulation_eCar$Main.ic" NAME="Main Coverage Results" MODIFIED="1667816291765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

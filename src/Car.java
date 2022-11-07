@@ -13,10 +13,11 @@ public class Car extends Vehicle {
         this.lastService = new Date(0000-00-00);
     }
 
-    public Car(int pCarId, int pCarTravelDistance, Date pLastService, int pTotalMili, String pCarColor){
+    public Car(int pCarId, int pCarTravelDistance, Date pLastService, String pCarColor){
         super();
+        this.model_ID = pCarId;
         this.carTravelDistance = pCarTravelDistance;
-        this.lastService = new Date(0000-00-00);
+        this.lastService = pLastService;
         this.carColor = pCarColor;
     }
 

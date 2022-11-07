@@ -1,12 +1,22 @@
 import java.sql.*;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ECarsCompany {
 
+    private String companyName;
+    private ElectricCar ElecCar;
+    private Map<String, Integer> numberofmodel= new HashMap<String, Integer>();
+    private Customer customer;
 
-    private String model;
-    private String chargingSpeed;
-    private java.util.Date releaseDate;
+    public ECarsCompany(String pCompanyName, ElectricCar pElectricCar, Map<String, Integer> pNbCarOwnByCompany, Customer pCustomer){
+        super();
+        this.companyName = pCompanyName;
+        this.ElecCar = pElectricCar;
+        this.numberofmodel.putAll(pNbCarOwnByCompany);
+        this.customer = pCustomer;
+    }
 
     /**
      * Print tous les model de voiture et ses attributs dans l'ordre alphabetique vis a vis du nom dui model.
@@ -108,5 +118,29 @@ public class ECarsCompany {
         }//catch
     }//availableEChargerPoints()
 
+    public String getCompanyName() {
+        return companyName;
+    }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Map<String, Integer> getNumberofmodel() {
+        return numberofmodel;
+    }
+
+    public void setElecCar(ElectricCar elecCar) {
+        ElecCar = elecCar;
+    }
+
+    public void setNumberofmodel(Map<String, Integer> numberofmodel) {
+        this.numberofmodel = numberofmodel;
+    }
+
+    public void welcomeMessage() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        System.out.println(this.companyName);
+        System.out.println(this.numberofmodel.toString());
+        printNbChargingPoints();
+    }
 }

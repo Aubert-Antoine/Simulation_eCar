@@ -35,4 +35,7 @@ public class Customer {
         conn.close();
     }
 
+    public ElectricCar geteCar() {
+        return eCar;
+    }
 }
