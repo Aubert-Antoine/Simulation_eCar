@@ -14,7 +14,7 @@ public class Main {
 //        db.writeInDatabase(db.readCSV("e-cars"), "E_Car");
 //        db.writeInDatabase(db.readCSV("chargePoints"), "Charging_Point");
 //        db.writeInDatabase(db.readCSV("customer"), "Customer");   //mercha pas car null
-        db.writeInDatabase(db.readCSV("chargingProcess"), "Charging_Process");
+        //db.writeInDatabase(db.readCSV("chargingProcess"), "Charging_Process");
         //marche pas car y a un cas de null
 
         EChargingPoint EP = new EChargingPoint();
@@ -26,8 +26,9 @@ public class Main {
 //        EP.updateDatabase("UPDATE Charging_Point SET number_of_outlets = 1, available_outlets = 1, city = 'P', address = 'P' WHERE point_id = 524");
 
         ECarsCompany EC = new ECarsCompany();
-//        EC.printCarModel();
-//        EC.printNbChargingPoints();
+        EC.printCarModel();
+        EC.printNbChargingPoints();
+        EC.availableEChargerPoints("Papho", false);
 
 
 //        db.timeStampConverter();

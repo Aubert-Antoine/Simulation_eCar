@@ -80,9 +80,33 @@ public class ECarsCompany {
     }//printCarModel
 
 
-    public void availableEChargerPoints(String city, boolean availableOutlets){
+    public void availableEChargerPoints(String city, boolean availableOutlets) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        //print for the city all outlets if false & only free outlets if true with address
 
-    }
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(Main.DB_URL, Main.USER, Main.PASS);
+        Statement stmt = conn.createStatement();
+
+        String SQLQ;
+        ResultSet outResultSet;
+
+
+        if(availableOutlets){
+            SQLQ = String.format("SELECT address FROM Charging_Point WHERE city = '%s' and available_outlets > 0",city);
+        } else {
+            SQLQ = String.format("SELECT address FROM Charging_Point WHERE city = '%s' ",city);
+        }
+
+        try {
+            outResultSet = stmt.executeQuery(SQLQ);
+            System.out.println("\n Query : "+ SQLQ +"  ->  done..");
+            while (outResultSet.next()){
+                System.out.println(outResultSet.getString(1));
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }//catch
+    }//availableEChargerPoints()
 
 
 }

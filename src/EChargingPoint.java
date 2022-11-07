@@ -85,18 +85,23 @@ public class EChargingPoint {
         conn.close();
     }//updateDatabase
 
-    public void finishCharging(Customer customer) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        //check if a customer has his car at a charging point : The date of starting_timestamp > fully_charge_timestamp => is charging -> Queries
-        String SQLQStartChargingTimeCar = "";
-        String SQLQEndChargingTimeCar = "";
-
-//        SQLQStartChargingTimeCar>SQLQEndChargingTimeCar = charge
-        if(date1.compareTo(date2) > 0){
-            System.out.println("The car is charging");
-        }
-
-        //replace null value to the current dateTime in field fully-charge_timestamp
-        String SQLUReplaceValues = "";
-        updateDatabase(SQLUReplaceValues);
-    }//finishCharging
+//    public void finishCharging(Customer customer) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+//        //check if a customer has his car at a charging point : The date of starting_timestamp > fully_charge_timestamp => is charging -> Queries
+//        String SQLQStartChargingTimeCar = "";
+//        String SQLQEndChargingTimeCar = "";
+//
+////        SQLQStartChargingTimeCar>SQLQEndChargingTimeCar = charge
+//        if(date1.compareTo(date2) > 0){
+//            System.out.println("The car is charging");
+//        }
+//
+//        //replace null value to the current dateTime in field fully-charge_timestamp
+//        String SQLUReplaceValues = "";
+//        updateDatabase(SQLUReplaceValues);
+//
+//        //Update the database => add 1 slot of available outlet -> update
+//        String SQLUAvailableOutlets = "UPDATE Charging_Point SET available_outlets = available_outlets+1 WHERE point_id = "+pPointID;
+//        //On  a pas moyen d'avoir acces aux id depuis customer
+//        updateDatabase(SQLUAvailableOutlets);
+//    }//finishCharging
 }

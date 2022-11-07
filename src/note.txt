@@ -1,6 +1,8 @@
 Customer database has 1 by default
 Charging process Time Stamps bug
 
+Charge Point prb 2ere value
+
 
 Q 5.a juste un getter ?
 Q 5.b juste faire available -1 ?
