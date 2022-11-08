@@ -1,5 +1,8 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
+
+import static java.lang.Integer.parseInt;
 
 public class UtilTools {
 
@@ -27,9 +30,8 @@ public class UtilTools {
     }//dateConverter()
 
     public static String timeStampConverter(String pTimeStamp){
-        System.out.println("time stamp in param "+pTimeStamp);
-
-        return pTimeStamp;
+        pTimeStamp=pTimeStamp.replace('.',' ');
+        return dateConverter(pTimeStamp.split(" ")[0]) + " " + pTimeStamp.split(" ")[1];
     }//timeStampConverter(.)
 
     /**
@@ -39,4 +41,28 @@ public class UtilTools {
     public static String currentDirectory(){
         return System.getProperty("user.dir");
     }//currentDirectory
-}
+
+
+    /**
+     * This methode take a string, make a subtring if is needed and then make it as a int
+     * @param pString should contain a numeric sequence
+     * @param regex index a the start a the subString
+     * @return int
+     */
+    public static int stringToInt(String pString, int regex){
+        int number;
+        if(regex != 0 ){
+            String subString = pString.substring(regex);
+            number = parseInt(subString);
+        }else {
+            number = parseInt(pString);
+        }
+        return number;
+    }//stringToInt
+
+
+
+
+}//UtilTools
+
+

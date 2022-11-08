@@ -8,10 +8,10 @@ import static java.lang.Integer.parseInt;
 
 public class ECarsCompany {
 
-    private String companyName;
-    private ElectricCar ElecCar;
-    private Map<String, Integer> numberofmodel = new HashMap<String, Integer>();
-    private Customer customer;
+    private static String companyName;
+    private static ElectricCar ElecCar;
+    private static Map<String, Integer> numberofmodel = new HashMap<String, Integer>();
+    private static Customer customer;
 
     public ECarsCompany(String pCompanyName, ElectricCar pElectricCar, Map<String, Integer> pNbCarOwnByCompany, Customer pCustomer) {
         super();
@@ -23,40 +23,24 @@ public class ECarsCompany {
 
 
 
-
-    public void welcomeMessage() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        System.out.println(this.companyName);
-        System.out.println(this.numberofmodel.toString());
-        printNbChargingPoints();
-    }
-
-
     public static void main(String[] args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         System.out.println("Hello world!");
 
-        Database db = new Database();
-//        EChargingPoint EP = new EChargingPoint();
-        ElectricCar EC = new ElectricCar();
-        Customer C = new Customer(1111, "NaN", EC, "NaN");
+        Database.connectToDatabase();
+        Database.writeInDatabase(Database.readCSV("e-cars"), "E_Car");
+        Database.writeInDatabase(Database.readCSV("chargePoints"), "Charging_Point");
+        Database.writeInDatabase(Database.readCSV("customer"), "Customer");
+        Database.writeInDatabase(Database.readCSV("chargingProcess"), "Charging_Process");
 
-        Map<String, Integer> hm = new HashMap<String, Integer>();
-        hm.put("model1", 3);
-        hm.put("model2", 4);
-        ECarsCompany ECC = new ECarsCompany("UCYC", EC, hm, C);
-
-
-        db.connectToDatabase();
-        db.writeInDatabase(db.readCSV("e-cars"), "E_Car");
-        db.writeInDatabase(db.readCSV("chargePoints"), "Charging_Point");
-        db.writeInDatabase(db.readCSV("customer"), "Customer");                     //mercha pas car null
-        db.writeInDatabase(db.readCSV("chargingProcess"), "Charging_Process");      //marche pas car y a un cas de null
-
-
-        ECC.welcomeMessage();
+        welcomeMessage();
         chatBox();
     }//main()
 
-
+    public static void welcomeMessage() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        System.out.println(companyName);
+        System.out.println(numberofmodel.toString());
+        printNbChargingPoints();
+    }
 
 
     public static void chatBox() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -70,25 +54,29 @@ public class ECarsCompany {
         System.out.println("4. Register");
         System.out.println("5. Exit");
 
-        System.out.println("\nPick a number : ");
-        int numberSelected;
-        numberSelected = sc.nextInt();
+        String numberSelected = "-1";
+        int nbSelected = 0;
 
-        while (numberSelected < 1 || numberSelected > 5) {
-            System.out.println("\n Pick a number : ");
-            numberSelected = sc.nextInt();
-        }//while
+        try {
+            //handle possible Type Errors
+            while (UtilTools.stringToInt(numberSelected,0) < 1 || UtilTools.stringToInt(numberSelected,0) > 5 ){
+                System.out.println("\nPick a number : ");
+                numberSelected = sc.nextLine();
+            }
+        }catch (Exception e){ e.printStackTrace();}
         sc.close();
 
-        if (numberSelected == 1) {
+        nbSelected = UtilTools.stringToInt(numberSelected,0);
+
+        if (nbSelected == 1) {
             option1();
-        } else if (numberSelected == 2) {
+        } else if (nbSelected == 2) {
             option2();
-        } else if (numberSelected == 3) {
+        } else if (nbSelected == 3) {
             option3();
-        } else if (numberSelected == 4) {
+        } else if (nbSelected == 4) {
             option4();
-        } else if (numberSelected == 5) {
+        } else if (nbSelected == 5) {
             option5();
         } else {
             System.out.println("bug -- nb selected out of range 1-5");
@@ -97,8 +85,8 @@ public class ECarsCompany {
 
 
     public static void option1() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        ECC.printCarModel();
-        ECC.printNbChargingPoints();
+        printCarModel();
+        printNbChargingPoints();
         chatBox();
     }//op1
 
@@ -143,7 +131,6 @@ public class ECarsCompany {
             String outStringResult = outResultSet.getString(1);
             System.out.println(outStringResult);
             //if () isUserExist = true;
-            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
             return;
@@ -152,7 +139,7 @@ public class ECarsCompany {
         sc.close();
         if (!isUserExist) {
             System.out.println("USER unknown");
-            chatBox(EP, EC, ECC);
+            chatBox();
         } else {
             subChatBox();
         }
@@ -165,7 +152,7 @@ public class ECarsCompany {
 
 
         //check if ID exist
-        String SQLQid = String.format("SELECT customer_id FROM Customer WHERE customer_id = %s ", ID);
+        String SQLQid = String.format("SELECT customer_id FROM Customer WHERE customer_id = %s ", customerID);
 
         Statement stmt = Database.connectDatabase();
 
@@ -198,35 +185,35 @@ public class ECarsCompany {
                 String SQLQModel = "";
                 outResultSet = stmt.executeQuery(SQLQModel);
 
-//                if (outResultSet.getInt(1) == 0 ){ // <!> param 1 ?  // == 0 => retour de sql null
-//                    System.out.println("The model is unknown");
-//                    System.out.println("Enter your car model");
-//                    carModel = scanner.nextLine();
-            }else{
-                System.out.println("Enter car color : ");
-                carColor = scanner.nextLine();
-                System.out.println("Enter car battery level : ");
-                carBatteryLevel = scanner.nextInt();
-                System.out.println("Enter car last service : ");
-                carDateService = scanner.nextLine();
-                System.out.println("Enter car millimetres : ");
-                carMillimetre = scanner.nextInt();
+                if (outResultSet.getInt(1) == 0) { // <!> param 1 ?  // == 0 => retour de sql null
+                    System.out.println("The model is unknown");
+                    System.out.println("Enter your car model");
+                    carModel = scanner.nextLine();
+                } else {
+                    System.out.println("Enter car color : ");
+                    carColor = scanner.nextLine();
+                    System.out.println("Enter car battery level : ");
+                    carBatteryLevel = scanner.nextInt();
+                    System.out.println("Enter car last service : ");
+                    carDateService = scanner.nextLine();
+                    System.out.println("Enter car millimetres : ");
+                    carMillimetre = scanner.nextInt();
 
-                modelID = modelTomodelId(carModel);
+                    modelID = modelToModelId(carModel);
 
-                String SQLInsertInBase = String.format("INSERT INTO Customer(customer_id, full_name, car_registration_number," +
-                        " model_id, car_color, car_battery_level, car_last_service, total_millimetres) VALUES (%e,'%s','%s',%e,'%s',%e,%e,%e)",
-                        customerID, fullName,GetPreviousCarRegistrationNumber()+1,modelID,carColor,carBatteryLevel,carDateService,carMillimetre );
+                    String SQLInsertInBase = String.format("INSERT INTO Customer(customer_id, full_name, car_registration_number," +
+                                    " model_id, car_color, car_battery_level, car_last_service, total_millimetres) VALUES (%e,'%s','%s',%e,'%s',%e,%e,%e)",
+                            customerID, fullName, Database.GetPreviousCarRegistrationNumber() + 1, modelID, carColor, carBatteryLevel, carDateService, carMillimetre);
 
-                scanner.close();
+                    scanner.close();
+                }
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         outResultSet.close();
-        conn.close();
         chatBox();
     }//option4
 
@@ -297,7 +284,6 @@ public class ECarsCompany {
             e.printStackTrace();
         }//catch
 
-        conn.close();
         outResultSet.close();
         return resultInt;
 
@@ -321,7 +307,6 @@ public class ECarsCompany {
             e.printStackTrace();
         }//catch
 
-        conn.close();
         outResultSet.close();
         subChatBox();
     }
@@ -330,21 +315,7 @@ public class ECarsCompany {
         chatBox();
     }
 
-    public static int GetPreviousCarRegistrationNumber() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        Statement stmt = Database.connectDatabase();
 
-
-        ResultSet outResultSet = null;
-        String SQLQModelToModelID = "SELECT MAX(car_registration_number) FROM Customer";
-        outResultSet = stmt.executeQuery(SQLQModelToModelID);
-        String maxRegistrationNumber = outResultSet.getString(0);
-        String registrationNumber = maxRegistrationNumber.substring(3);
-        int number = parseInt(registrationNumber);
-
-        outResultSet.close();
-        conn.close();
-        return number;
-    }
 
     public static void availableEChargerPoints(String city, boolean availableOutlets) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         //print for the city all outlets if false & only free outlets if true with address
@@ -394,7 +365,6 @@ public class ECarsCompany {
         int modelID = outResultSet.getInt(0);
 
         outResultSet.close();
-        conn.close();
         return modelID;
     }
 
@@ -406,7 +376,7 @@ public class ECarsCompany {
      * @throws InstantiationException
      * @throws IllegalAccessException
      */
-    public void printCarModel() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public static void printCarModel() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Statement stmt = Database.connectDatabase();
 
 
@@ -432,23 +402,16 @@ public class ECarsCompany {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        conn.close();
     }//printCarModel
 
 
-    public void printNbChargingPoints() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public static void printNbChargingPoints() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Statement stmt = Database.connectDatabase();
 
-
         ResultSet outResultSet = null;
-//        String pQuery = "SELECT SUM(number_of_outlets) AS city FROM Charging_Point";
-//        String pSubQuery = "SELECT SUM(number_of_outlets) FROM Charging_Point WHERE city = 'Papho'";
-
         String[] city = {"Papho", "Limassol", "Larnaca", "Nicosia"};
 
         try {
-
             for (String town : city) {
                 outResultSet = stmt.executeQuery("SELECT SUM(number_of_outlets) FROM Charging_Point WHERE city = '" + town + "'");
                 System.out.println("Query : " + "SELECT SUM(number_of_outlets) FROM Charging_Point WHERE city = '" + town + "'" + "  ->  done..");
@@ -457,16 +420,12 @@ public class ECarsCompany {
 
                     int column1 = outResultSet.getInt(1);
                     System.out.println(column1);
-                }
-
-            }
-
-
+                }//while
+            }//for
         } catch (Exception e) {
             e.printStackTrace();
         }
         outResultSet.close();
-        conn.close();
     }//printCarModel
 
 

@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="some warning patch [#3]">
+    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="Class Main deleted &amp; new Class UtilTools">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ECarsCompany.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECarsCompany.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UtilTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UtilTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csv/chargePoints.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/chargePoints.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/note.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/note.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +96,7 @@
       <workItem from="1667724637767" duration="34457000" />
       <workItem from="1667805297770" duration="14903000" />
       <workItem from="1667891036883" duration="15857000" />
-      <workItem from="1667930370581" duration="829000" />
+      <workItem from="1667930370581" duration="5046000" />
     </task>
     <task id="LOCAL-00001" summary=".csv &amp; .pdf &amp; .jar &amp; DBUtil.java">
       <created>1667591884043</created>
@@ -219,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667906404384</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Class Main deleted &amp; new Class UtilTools">
+      <created>1667932685316</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1667932685316</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,7 +268,8 @@
     <MESSAGE value="some warning patch [#1]" />
     <MESSAGE value="some warning patch [#2]" />
     <MESSAGE value="some warning patch [#3]" />
-    <option name="LAST_COMMIT_MESSAGE" value="some warning patch [#3]" />
+    <MESSAGE value="Class Main deleted &amp; new Class UtilTools" />
+    <option name="LAST_COMMIT_MESSAGE" value="Class Main deleted &amp; new Class UtilTools" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

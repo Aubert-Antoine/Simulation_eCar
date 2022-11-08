@@ -22,8 +22,8 @@ public class Database implements DatabaseInterface{
      * @throws InstantiationException
      * @throws IllegalAccessException
      */
-    @Override
-    public void connectToDatabase() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+    public static void connectToDatabase() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         // Open a connection
         Statement stmt = connectDatabase();
 
@@ -107,7 +107,7 @@ public class Database implements DatabaseInterface{
      * @param pNameOfCSVFile the csv file name without '.csv'
      * @return a LinkedList with all lines via String format
      */
-    public LinkedList readCSV(String pNameOfCSVFile){
+    public static LinkedList readCSV(String pNameOfCSVFile){
         /*
         make a linkedList to transfer data to writeInDatabase the aim is to make 1 methode = 1 thing
         LinkedList is usefully because the number of element and type are not defined
@@ -141,8 +141,7 @@ public class Database implements DatabaseInterface{
      * @param pLines send by readCSV
      * @param pNameOfDatabase the name of the database which is filled
      */
-    public void writeInDatabase(@NotNull LinkedList pLines, String pNameOfDatabase)
-            throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    public static void writeInDatabase(@NotNull LinkedList pLines, String pNameOfDatabase) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 
         Statement stmt = connectDatabase();
 
@@ -162,23 +161,41 @@ public class Database implements DatabaseInterface{
                     sqlLine = "INSERT INTO Charging_Point VALUES (" + listContent[i][0] + ", " + listContent[i][1] + ", " + listContent[i][2] + ", '" + listContent[i][3] + "', '" + listContent[i][4] + "')";
                     break;
                 case "Customer":
-                    sqlLine = "INSERT INTO Customer VALUES (" + listContent[i][0] + ", '" + listContent[i][1] + "', '" + listContent[i][2] + "', " + listContent[i][3] + ",'" + listContent[i][4] + "'," + listContent[i][5] + ", " + UtilTools.dateConverter(listContent[i][6]) + "," + /*listContent[i][7]*/ -1 + ")";
+                    sqlLine = "INSERT INTO Customer VALUES (" + listContent[i][0] + ", '" + listContent[i][1] + "', '" + listContent[i][2] + "', " + listContent[i][3] + ",'" + listContent[i][4] + "'," + listContent[i][5] + ", '" + UtilTools.dateConverter(listContent[i][6]) + "' )";
                     break;
                 case "Charging_Process":
-                    try {
-                        sqlLine = "INSERT INTO Charging_Process VALUES (" + listContent[i][0] + ", " + listContent[i][1] + ", " + listContent[i][2] + "," + UtilTools.timeStampConverter(listContent[i][3]) + "," + UtilTools.timeStampConverter(listContent[i][4]) + ")";
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    sqlLine = "INSERT INTO Charging_Process VALUES (" + listContent[i][0] + ", " + listContent[i][1] + ", " + listContent[i][2] + "," + UtilTools.timeStampConverter(listContent[i][3]) + "," + UtilTools.timeStampConverter(listContent[i][4]) + ")";
                     break;
                 default:
                     System.out.println("unknown name of database");
                     break;
-            }
+            }//switch
             stmt.executeUpdate(sqlLine);
         }//for
     }//writeInDatabase
 
+//    public static boolean isInDatabase(String pString, boolean isString) throws SQLException, ClassNotFoundException {
+//        Statement statement = connectDatabase();
+//        if(!isString){
+//            UtilTools.stringToInt(pString,0);
+//
+//        }else{
+//
+//        }
+//    }//isInDatabase
 
+    public static int GetPreviousCarRegistrationNumber() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        Statement stmt = Database.connectDatabase();
+
+
+        ResultSet outResultSet = null;
+        String SQLQModelToModelID = "SELECT MAX(car_registration_number) FROM Customer";
+        outResultSet = stmt.executeQuery(SQLQModelToModelID);
+        String maxRegistrationNumber = outResultSet.getString(0);
+        int number = UtilTools.stringToInt(maxRegistrationNumber, 3);
+
+        outResultSet.close();
+        return number;
+    }
 }//class
 

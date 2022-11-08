@@ -1,8 +1,3 @@
-Customer database has 1 by default
-Charging process Time Stamps bug
-
-Charge Point prb 2ere value
-
 
 Q 5.a juste un getter ?
 Q 5.b juste faire available -1 ?
@@ -22,3 +17,10 @@ Start Charging a faire
 REgister q C while pour le model si il n'existe pas
 
 ECarCompany cree une ECarsCompany ECC = new ECarsCompany("UCYC", EC, hm, C); avec une hashMap --> prb avec model et nombre
+
+
+
+writeInDatabase
+String[[]]
+
+Sortir dans until scanner --> ECArCompa chatBox
