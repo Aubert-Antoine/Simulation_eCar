@@ -1,26 +1,8 @@
 
-Q 5.a juste un getter ?
-Q 5.b juste faire available -1 ?
-G 5.c ?? add a new record or change it values ? --> update Starting timeStamp
-
-main scanner patch that user can log with a str/int at the wrong moment
-
-Company have customer ?
-
-option 3
-            String outStringResult = outResultSet.getString(1);
-            System.out.println(outStringResult);
-
-
 Start Charging a faire
 
 REgister q C while pour le model si il n'existe pas
 
-ECarCompany cree une ECarsCompany ECC = new ECarsCompany("UCYC", EC, hm, C); avec une hashMap --> prb avec model et nombre
-
-
-
 writeInDatabase
-String[[]]
 
-Sortir dans until scanner --> ECArCompa chatBox
+

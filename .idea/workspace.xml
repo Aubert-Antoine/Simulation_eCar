@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="Class Main deleted &amp; new Class UtilTools">
+    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="Some patch due to the last modifs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ECarsCompany.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECarsCompany.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UtilTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UtilTools.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csv/chargePoints.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/chargePoints.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EChargingPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EChargingPoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/note.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/note.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +53,8 @@
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -96,7 +95,7 @@
       <workItem from="1667724637767" duration="34457000" />
       <workItem from="1667805297770" duration="14903000" />
       <workItem from="1667891036883" duration="15857000" />
-      <workItem from="1667930370581" duration="5046000" />
+      <workItem from="1667930370581" duration="8980000" />
     </task>
     <task id="LOCAL-00001" summary=".csv &amp; .pdf &amp; .jar &amp; DBUtil.java">
       <created>1667591884043</created>
@@ -231,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667932685316</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Some patch due to the last modifs">
+      <created>1667936592530</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1667936592530</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,7 +275,8 @@
     <MESSAGE value="some warning patch [#2]" />
     <MESSAGE value="some warning patch [#3]" />
     <MESSAGE value="Class Main deleted &amp; new Class UtilTools" />
-    <option name="LAST_COMMIT_MESSAGE" value="Class Main deleted &amp; new Class UtilTools" />
+    <MESSAGE value="Some patch due to the last modifs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some patch due to the last modifs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -288,6 +295,10 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Simulation_eCar$Main.ic" NAME="Main Coverage Results" MODIFIED="1667816291765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

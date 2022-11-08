@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.Date;
 
 public class EChargingPoint {
 
@@ -15,7 +16,7 @@ public class EChargingPoint {
      * @param pCustomer
      * @param pPointID
      */
-    public void startCharging(Customer pCustomer, int pPointID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public static void startCharging(int pCustomerID, int pPointID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         //Print the beginning of charging -> query
         String SQLQBeginningCharging = "SELECT starting_timestamp FROM Charging_Process WHERE point_id = "+pPointID;
         System.out.println(queryDatabase(SQLQBeginningCharging));
@@ -25,7 +26,8 @@ public class EChargingPoint {
         updateDatabase(SQLUAvailableOutlets);
 
         // insert a new record => change the starting_timestamp -> Update
-        String SQLUNewRecord = "";
+        Date date = new Date();
+        String SQLUNewRecord = String.format("INSERT INTO Charging_Process(customer_id, point_id,starting_timestamp) values (%e, %e, '%s')",pCustomerID,pPointID,date);
         updateDatabase(SQLUNewRecord);
     }//startCharging
 
@@ -34,7 +36,7 @@ public class EChargingPoint {
      * @param pQuery
      * @return outResultSet a ResultSet type
      */
-    public int queryDatabase(String pQuery) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    public static int queryDatabase(String pQuery) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         Statement stmt = Database.connectDatabase();
 
 
@@ -63,7 +65,7 @@ public class EChargingPoint {
      * @throws InstantiationException
      * @throws IllegalAccessException
      */
-    public void updateDatabase(String pUpdate) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    public static void updateDatabase(String pUpdate) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         Statement stmt = Database.connectDatabase();
 
 
