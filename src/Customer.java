@@ -5,8 +5,8 @@ import java.sql.Statement;
 
 public class Customer {
 
-    private int ID;
-    private String fullName;
+    private final int ID;
+    private final String fullName;
     private ElectricCar eCar;
     private String carRegistrationNumber;
 

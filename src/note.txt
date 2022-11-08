@@ -20,3 +20,5 @@ option 3
 Start Charging a faire
 
 REgister q C while pour le model si il n'existe pas
+
+ECarCompany cree une ECarsCompany ECC = new ECarsCompany("UCYC", EC, hm, C); avec une hashMap --> prb avec model et nombre

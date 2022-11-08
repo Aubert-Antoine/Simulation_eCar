@@ -6,12 +6,10 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Database implements DatabaseInterface{
-
-    static final boolean debug = true;
-    static final String defaultValueOfTimestamp = "1000/00/00/00/00/00";
 
 
 
@@ -99,33 +97,30 @@ public class Database implements DatabaseInterface{
      * @return a LinkedList with all lines via String format
      */
     public LinkedList readCSV(String pNameOfCSVFile){
+        /*
+        make a linkedList to transfer data to writeInDatabase the aim is to make 1 methode = 1 thing
+        LinkedList is usefully because the number of element and type are not defined
+         */
+        LinkedList CSVLines = new LinkedList();
+
         try {
             //join path to make an absolute path of data
-            Path globalPath = (Path)Paths.get(currentDirectory(), "src", "csv", pNameOfCSVFile+".csv");
+            Path globalPath = Paths.get(currentDirectory(), "src", "csv", pNameOfCSVFile+".csv");
             Scanner scanner = new Scanner(globalPath);
             String DELIMITER = ",";
             scanner.useDelimiter(DELIMITER);
 
             scanner.nextLine(); //read the first line useless
 
-            LinkedList CSVLines = new LinkedList();
             while (scanner.hasNextLine()){CSVLines.add(scanner.nextLine());}
+
             scanner.close();
             return CSVLines;
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }//catch
+        }catch (Exception ex) {ex.printStackTrace();}//catch
+
         return null;
     }//readCSV
 
-
-    /**
-     * currentDirectory return the absolut path of the "Simulation eCar" project.
-     * @return
-     */
-    public String currentDirectory(){
-        return System.getProperty("user.dir");
-    }//currentDirectory
 
 
 
@@ -148,36 +143,40 @@ public class Database implements DatabaseInterface{
         String sqlLine = "";
 
         for (int i = 0; i <nbOfLine; i++){
-            System.out.println("le i = "+i);
-            listContent[i] = pLines.pollFirst().toString().split(",");
+            listContent[i] = Objects.requireNonNull(pLines.pollFirst()).toString().split(",");
 
-            if(debug) {
-                System.out.println("time 1 " + listContent[i][3]);
-                System.out.println("time 2 " + listContent[i][4]);
+            //fill the good database
+            switch (pNameOfDatabase) {
+                case "E_Car":
+                    sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] + ", '" + listContent[i][1] + "', '" + listContent[i][2] + "', " + dateConverter(listContent[i][3]) + ")";
+                    break;
+                case "Charging_Point":
+                    sqlLine = "INSERT INTO Charging_Point VALUES (" + listContent[i][0] + ", " + listContent[i][1] + ", " + listContent[i][2] + ", '" + listContent[i][3] + "', '" + listContent[i][4] + "')";
+                    break;
+                case "Customer":
+                    sqlLine = "INSERT INTO Customer VALUES (" + listContent[i][0] + ", '" + listContent[i][1] + "', '" + listContent[i][2] + "', " + listContent[i][3] + ",'" + listContent[i][4] + "'," + listContent[i][5] + ", " + dateConverter(listContent[i][6]) + "," + /*listContent[i][7]*/ -1 + ")";
+                    break;
+                case "Charging_Process":
+                    try {
+                        sqlLine = "INSERT INTO Charging_Process VALUES (" + listContent[i][0] + ", " + listContent[i][1] + ", " + listContent[i][2] + "," + timeStampConverter(listContent[i][3]) + "," + timeStampConverter(listContent[i][4]) + ")";
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                default:
+                    System.out.println("unknown name of database");
+                    break;
             }
-
-            if(pNameOfDatabase.equals("E_Car")){
-                sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] +", '"+listContent[i][1] + "', '" + listContent[i][2] + "', " + dateConverter(listContent[i][3]) +")";
-            } else if (pNameOfDatabase.equals("Charging_Point")) {
-                sqlLine = "INSERT INTO Charging_Point VALUES (" + listContent[i][0] +", "+listContent[i][1] + ", " + listContent[i][2] + ", '" + listContent[i][3] +"', '"+ listContent[i][4] +"')";
-            } else if (pNameOfDatabase.equals("Customer")) {
-                sqlLine = "INSERT INTO Customer VALUES (" + listContent[i][0] +", '"+listContent[i][1] + "', '" + listContent[i][2] + "', " + listContent[i][3] +",'" + listContent[i][4] +"'," + listContent[i][5] + ", " + dateConverter(listContent[i][6]) + "," + /*listContent[i][7]*/ -1 + ")";
-            } else if (pNameOfDatabase.equals("Charging_Process")) {
-                try{
-                    sqlLine = "INSERT INTO Charging_Process VALUES (" + listContent[i][0] +", "+listContent[i][1] + ", " + listContent[i][2] + "," + timeStampConverter(listContent[i][3]) + "," + timeStampConverter(listContent[i][4]) + ")";
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-            } else{System.out.println("unknown name of database");}
             stmt.executeUpdate(sqlLine);
         }//for
         conn.close();
     }//writeInDatabase
 
+
+
     /**
+     * <a href="https://stackoverflow.com/a/14039210">...</a>
      * convert the date dd/mm/yyyy to yyyy-mm-dd
-     * https://stackoverflow.com/a/14039210
      * @author Antoine Aubert & stackoverflow
      * @param pDate the date at java.sql.date format -> notice that the result is the same with String format
      * @return
@@ -194,16 +193,19 @@ public class Database implements DatabaseInterface{
         }
     }//dateConverter()
 
-
     public String timeStampConverter(String pTimeStamp){
         System.out.println("time stamp in param "+pTimeStamp);
 
-        if(pTimeStamp.getClass().equals(String.class)){
-            return pTimeStamp;
-        }else {
-            return null;
-        }
+        return pTimeStamp;
     }//timeStampConverter(.)
+
+    /**
+     * currentDirectory return the absolut path of the "Simulation eCar" project.
+     * @return
+     */
+    public String currentDirectory(){
+        return System.getProperty("user.dir");
+    }//currentDirectory
 
 }//class
 
