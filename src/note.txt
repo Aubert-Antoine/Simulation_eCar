@@ -17,3 +17,6 @@ option 3
             System.out.println(outStringResult);
 
 
+Start Charging a faire
+
+REgister q C while pour le model si il n'existe pas

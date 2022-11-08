@@ -2,10 +2,10 @@ import java.util.Date;
 
 public class Car extends Vehicle {
 
-    private int carTravelDistance = 0;
-    private Date lastService = new Date(0000-00-00);
-    private String carColor = "";
-    private int model_ID = 0;
+    private static int carTravelDistance = 0;
+    private static Date lastService = new Date(0000-00-00);
+    private static String carColor = "";
+    private static int model_ID = 0;
 
     public Car(){
         super();
@@ -33,11 +33,11 @@ public class Car extends Vehicle {
         this.carTravelDistance = carTravelDistance;
     }
 
-    public Date getLastService() {
+    public static Date getLastService() {
         return lastService;
     }
 
-    public int getCarTravelDistance() {
+    public static int getCarTravelDistance() {
         return carTravelDistance;
     }
 

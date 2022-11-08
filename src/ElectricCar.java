@@ -1,6 +1,6 @@
 public class ElectricCar extends Car{
 
-    private int batteryBalance = 0;
+    private static int batteryBalance = 0;
 
     public ElectricCar(){
         super();
@@ -12,7 +12,7 @@ public class ElectricCar extends Car{
         this.batteryBalance = pBatteryBalance;
     }
 
-    public int getBatteryBalance() {
+    public static int getBatteryBalance() {
         return batteryBalance;
     }
 

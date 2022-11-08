@@ -685,7 +685,7 @@ sql7545214|schema||sql7545214||UPDATE|G</Grants>
       <Position>2</Position>
     </column>
     <column id="208" parent="202" name="available_outlets">
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>int(11)|0s</DataType>
       <Position>3</Position>
     </column>
     <column id="209" parent="202" name="city">

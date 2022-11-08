@@ -44,7 +44,6 @@ public class EChargingPoint {
         Statement stmt = conn.createStatement();
 
         ResultSet outResultSet = null;
-        String[] outResultString;
         int pID = 0;
         try {
             outResultSet = stmt.executeQuery(pQuery);
