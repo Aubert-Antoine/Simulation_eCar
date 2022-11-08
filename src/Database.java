@@ -11,7 +11,9 @@ import java.util.Scanner;
 
 public class Database implements DatabaseInterface{
 
-
+    static final String DB_URL = "jdbc:mysql://sql7.freesqldatabase.com/sql7545214";
+    static final String USER = "sql7545214";
+    static final String PASS = "EtqbWfmqYa";
 
     /**
      * connectToDatabase create a connection and then make their 4 tables
@@ -23,9 +25,7 @@ public class Database implements DatabaseInterface{
     @Override
     public void connectToDatabase() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         // Open a connection
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Connection conn = DriverManager.getConnection(Main.DB_URL, Main.USER, Main.PASS);
-        Statement stmt = conn.createStatement();
+        Statement stmt = connectDatabase();
 
         try {
             String sql ="CREATE TABLE Charging_Point " +
@@ -87,8 +87,19 @@ public class Database implements DatabaseInterface{
         } catch (SQLException e) {
             e.printStackTrace();
         }//catch
-        conn.close();
     }//connectToDatabase()
+
+    /**
+     * This methode open a connextion to the database
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+    public static Statement connectDatabase() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        return conn.createStatement();
+    }
 
 
     /**
@@ -105,7 +116,7 @@ public class Database implements DatabaseInterface{
 
         try {
             //join path to make an absolute path of data
-            Path globalPath = Paths.get(currentDirectory(), "src", "csv", pNameOfCSVFile+".csv");
+            Path globalPath = Paths.get(UtilTools.currentDirectory(), "src", "csv", pNameOfCSVFile+".csv");
             Scanner scanner = new Scanner(globalPath);
             String DELIMITER = ",";
             scanner.useDelimiter(DELIMITER);
@@ -133,10 +144,7 @@ public class Database implements DatabaseInterface{
     public void writeInDatabase(@NotNull LinkedList pLines, String pNameOfDatabase)
             throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 
-        // Open a connection
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Connection conn = DriverManager.getConnection(Main.DB_URL, Main.USER, Main.PASS);
-        Statement stmt = conn.createStatement();
+        Statement stmt = connectDatabase();
 
         String[][] listContent = new String[pLines.size()][];
         int nbOfLine = pLines.size();      //ini here and not in the for because the value change due to the .poll which remove at each call
@@ -148,17 +156,17 @@ public class Database implements DatabaseInterface{
             //fill the good database
             switch (pNameOfDatabase) {
                 case "E_Car":
-                    sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] + ", '" + listContent[i][1] + "', '" + listContent[i][2] + "', " + dateConverter(listContent[i][3]) + ")";
+                    sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] + ", '" + listContent[i][1] + "', '" + listContent[i][2] + "', " + UtilTools.dateConverter(listContent[i][3]) + ")";
                     break;
                 case "Charging_Point":
                     sqlLine = "INSERT INTO Charging_Point VALUES (" + listContent[i][0] + ", " + listContent[i][1] + ", " + listContent[i][2] + ", '" + listContent[i][3] + "', '" + listContent[i][4] + "')";
                     break;
                 case "Customer":
-                    sqlLine = "INSERT INTO Customer VALUES (" + listContent[i][0] + ", '" + listContent[i][1] + "', '" + listContent[i][2] + "', " + listContent[i][3] + ",'" + listContent[i][4] + "'," + listContent[i][5] + ", " + dateConverter(listContent[i][6]) + "," + /*listContent[i][7]*/ -1 + ")";
+                    sqlLine = "INSERT INTO Customer VALUES (" + listContent[i][0] + ", '" + listContent[i][1] + "', '" + listContent[i][2] + "', " + listContent[i][3] + ",'" + listContent[i][4] + "'," + listContent[i][5] + ", " + UtilTools.dateConverter(listContent[i][6]) + "," + /*listContent[i][7]*/ -1 + ")";
                     break;
                 case "Charging_Process":
                     try {
-                        sqlLine = "INSERT INTO Charging_Process VALUES (" + listContent[i][0] + ", " + listContent[i][1] + ", " + listContent[i][2] + "," + timeStampConverter(listContent[i][3]) + "," + timeStampConverter(listContent[i][4]) + ")";
+                        sqlLine = "INSERT INTO Charging_Process VALUES (" + listContent[i][0] + ", " + listContent[i][1] + ", " + listContent[i][2] + "," + UtilTools.timeStampConverter(listContent[i][3]) + "," + UtilTools.timeStampConverter(listContent[i][4]) + ")";
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -169,43 +177,8 @@ public class Database implements DatabaseInterface{
             }
             stmt.executeUpdate(sqlLine);
         }//for
-        conn.close();
     }//writeInDatabase
 
-
-
-    /**
-     * <a href="https://stackoverflow.com/a/14039210">...</a>
-     * convert the date dd/mm/yyyy to yyyy-mm-dd
-     * @author Antoine Aubert & stackoverflow
-     * @param pDate the date at java.sql.date format -> notice that the result is the same with String format
-     * @return
-     */
-    public String dateConverter(String pDate){
-        if(pDate.contains("null")){
-            return null;
-        }else {
-            java.util.Date date = new Date(pDate);
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String format = formatter.format(date);
-
-            return "'"+format+"'"; // fix the bug due to null don't need quote but values need inside sql requests
-        }
-    }//dateConverter()
-
-    public String timeStampConverter(String pTimeStamp){
-        System.out.println("time stamp in param "+pTimeStamp);
-
-        return pTimeStamp;
-    }//timeStampConverter(.)
-
-    /**
-     * currentDirectory return the absolut path of the "Simulation eCar" project.
-     * @return
-     */
-    public String currentDirectory(){
-        return System.getProperty("user.dir");
-    }//currentDirectory
 
 }//class
 

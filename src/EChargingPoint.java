@@ -35,9 +35,7 @@ public class EChargingPoint {
      * @return outResultSet a ResultSet type
      */
     public int queryDatabase(String pQuery) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Connection conn = DriverManager.getConnection(Main.DB_URL, Main.USER, Main.PASS);
-        Statement stmt = conn.createStatement();
+        Statement stmt = Database.connectDatabase();
 
 
         int pID = 0;
@@ -54,7 +52,6 @@ public class EChargingPoint {
 
 
         }//catch
-        conn.close();
         return pID;
     }//queryDatabase(.)
 
@@ -67,9 +64,8 @@ public class EChargingPoint {
      * @throws IllegalAccessException
      */
     public void updateDatabase(String pUpdate) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Connection conn = DriverManager.getConnection(Main.DB_URL, Main.USER, Main.PASS);
-        Statement stmt = conn.createStatement();
+        Statement stmt = Database.connectDatabase();
+
 
         try {
             stmt.executeUpdate(pUpdate);
@@ -77,7 +73,6 @@ public class EChargingPoint {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        conn.close();
     }//updateDatabase
 
 //    public void finishCharging(Customer customer) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {

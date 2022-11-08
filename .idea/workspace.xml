@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="Fin question --&gt; debug">
+    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="some warning patch [#3]">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECarsCompany.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECarsCompany.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,30 +34,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/antoi/IdeaProjects/Simulation eCar/Library_JDBC/jdbc.jar&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/antoi/Desktop/perso_moi/travail/E3/JAVA/Elecctric_cars",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="main" />
@@ -94,7 +90,8 @@
       <workItem from="1667683107659" duration="9689000" />
       <workItem from="1667724637767" duration="34457000" />
       <workItem from="1667805297770" duration="14903000" />
-      <workItem from="1667891036883" duration="13952000" />
+      <workItem from="1667891036883" duration="15857000" />
+      <workItem from="1667930370581" duration="829000" />
     </task>
     <task id="LOCAL-00001" summary=".csv &amp; .pdf &amp; .jar &amp; DBUtil.java">
       <created>1667591884043</created>
@@ -208,7 +205,21 @@
       <option name="project" value="LOCAL" />
       <updated>1667904277581</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="some warning patch [#2]">
+      <created>1667906265999</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1667906265999</updated>
+    </task>
+    <task id="LOCAL-00018" summary="some warning patch [#3]">
+      <created>1667906404384</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1667906404384</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,7 +253,10 @@
     <MESSAGE value="Q 6 done" />
     <MESSAGE value="lOGIN IN PROGRESS" />
     <MESSAGE value="Fin question --&gt; debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fin question --&gt; debug" />
+    <MESSAGE value="some warning patch [#1]" />
+    <MESSAGE value="some warning patch [#2]" />
+    <MESSAGE value="some warning patch [#3]" />
+    <option name="LAST_COMMIT_MESSAGE" value="some warning patch [#3]" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
