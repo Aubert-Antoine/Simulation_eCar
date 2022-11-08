@@ -10,10 +10,6 @@ public class EChargingPoint {
 
 
 
-    public int getAvailableOutlets() {
-        return availableOutlets;
-    }
-
     /**
      * Print the time of start of charging for a specific car
      * @param pCustomer
@@ -43,22 +39,22 @@ public class EChargingPoint {
         Connection conn = DriverManager.getConnection(Main.DB_URL, Main.USER, Main.PASS);
         Statement stmt = conn.createStatement();
 
-        ResultSet outResultSet = null;
+
         int pID = 0;
         try {
+            ResultSet outResultSet;
             outResultSet = stmt.executeQuery(pQuery);
             System.out.println("Query : "+ pQuery +"  ->  done..");
 
             pID = outResultSet.getInt(0);
             System.out.println("outResultSet : " + pID);
-
+            outResultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
 
 
         }//catch
         conn.close();
-        outResultSet.close();
         return pID;
     }//queryDatabase(.)
 
