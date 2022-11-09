@@ -1,8 +1,0 @@
-
-Start Charging a faire
-
-REgister q C while pour le model si il n'existe pas
-
-writeInDatabase
-
-

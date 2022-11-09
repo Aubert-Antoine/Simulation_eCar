@@ -32,12 +32,10 @@ public class ECarsCompany {
 //        Database.writeInDatabase(Database.readCSV("e-cars"), "E_Car");
 //        Database.writeInDatabase(Database.readCSV("chargePoints"), "Charging_Point");
 //        Database.writeInDatabase(Database.readCSV("customer"), "Customer");
-        Database.writeInDatabase(Database.readCSV("chargingProcess"), "Charging_Process");
+//        Database.writeInDatabase(Database.readCSV("chargingProcess"), "Charging_Process");
 
-//        UtilTools.timeStampConverter2("23/10/2022.15:05:49");
-
-        //welcomeMessage();
-        //chatBox();
+        welcomeMessage();
+        chatBox();
     }//main()
 
     public static void welcomeMessage() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {

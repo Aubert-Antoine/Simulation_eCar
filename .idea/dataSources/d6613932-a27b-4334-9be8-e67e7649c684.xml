@@ -724,11 +724,16 @@ sql7553363|schema||sql7553363||UPDATE|G</Grants>
       <Position>3</Position>
     </column>
     <column id="216" parent="203" name="starting_timestamp">
-      <DataType>datetime|0s</DataType>
+      <DataType>timestamp|0s</DataType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <NotNull>1</NotNull>
+      <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
       <Position>4</Position>
     </column>
     <column id="217" parent="203" name="fully_charge_timestamp">
-      <DataType>datetime|0s</DataType>
+      <DataType>timestamp|0s</DataType>
+      <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
+      <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
     <foreign-key id="218" parent="203" name="Charging_Process_ibfk_1">

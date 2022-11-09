@@ -77,8 +77,8 @@ public class Database implements DatabaseInterface{
                         "(process_id INTEGER not NULL, " +
                         " customer_id INTEGER, " +
                         " point_id INTEGER, " +
-                        " starting_timestamp DATETIME, " +
-                        " fully_charge_timestamp DATETIME, " +
+                        " starting_timestamp TIMESTAMP, " +
+                        " fully_charge_timestamp TIMESTAMP, " +
                         "PRIMARY KEY ( process_id, customer_id, point_id ),"+
                         "FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),"+
                         "FOREIGN KEY (point_id) REFERENCES Charging_Point(point_id))";
@@ -156,7 +156,7 @@ public class Database implements DatabaseInterface{
             //fill the good database
             switch (pNameOfDatabase) {
                 case "E_Car":
-                    sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] + ", '" + listContent[i][1] + "', '" + listContent[i][2] + "', '" + UtilTools.dateConverter(listContent[i][3]) + "')";
+                    sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] + ", '" + listContent[i][1] + "', '" + listContent[i][2] + "', " + UtilTools.dateConverter(listContent[i][3]) + ")";
                     break;
                 case "Charging_Point":
                     sqlLine = "INSERT INTO Charging_Point VALUES (" + listContent[i][0] + ", " + listContent[i][1] + ", " + listContent[i][2] + ", '" + listContent[i][3] + "', '" + listContent[i][4] + "')";
