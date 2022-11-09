@@ -28,14 +28,16 @@ public class ECarsCompany {
     public static void main(String[] args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         System.out.println("Hello world!");
 
-        Database.connectToDatabase();
-        Database.writeInDatabase(Database.readCSV("e-cars"), "E_Car");
-        Database.writeInDatabase(Database.readCSV("chargePoints"), "Charging_Point");
-        Database.writeInDatabase(Database.readCSV("customer"), "Customer");
+//        Database.connectToDatabase();
+//        Database.writeInDatabase(Database.readCSV("e-cars"), "E_Car");
+//        Database.writeInDatabase(Database.readCSV("chargePoints"), "Charging_Point");
+//        Database.writeInDatabase(Database.readCSV("customer"), "Customer");
         Database.writeInDatabase(Database.readCSV("chargingProcess"), "Charging_Process");
 
-        welcomeMessage();
-        chatBox();
+//        UtilTools.timeStampConverter2("23/10/2022.15:05:49");
+
+        //welcomeMessage();
+        //chatBox();
     }//main()
 
     public static void welcomeMessage() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -259,7 +261,8 @@ public class ECarsCompany {
         scanner.close();
 
         // check is the id is valid
-        outResultSet = stmt.executeQuery("SELECT count(*) FROM Charging_Point WHERE point_id = "+intID);
+        String SQL = "SELECT count(*) FROM Charging_Point WHERE point_id = "+intID;
+        outResultSet = stmt.executeQuery(SQL);
         outResultSet.next();
         if (outResultSet.getInt(1)==0) {
             System.out.println("This point ID is not in database");
@@ -274,8 +277,6 @@ public class ECarsCompany {
             subChatBox(pID);
         }
         EChargingPoint.startCharging(pID,intID);
-
-
     }// Start_charging
 
     public static void Complete_charging_process(int pCustomerID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {

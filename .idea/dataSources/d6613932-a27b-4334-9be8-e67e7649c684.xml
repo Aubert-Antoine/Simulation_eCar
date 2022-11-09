@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="sql7545214">
+<dataSource name="sql7553363">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.43">
     <root id="1">
       <DefaultCasing>exact</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
       <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
-      <Grants>sql7545214|schema||sql7545214||ALTER|G
-sql7545214|schema||sql7545214||ALTER ROUTINE|G
-sql7545214|schema||sql7545214||CREATE|G
-sql7545214|schema||sql7545214||CREATE ROUTINE|G
-sql7545214|schema||sql7545214||CREATE VIEW|G
-sql7545214|schema||sql7545214||DELETE|G
-sql7545214|schema||sql7545214||DROP|G
-sql7545214|schema||sql7545214||EXECUTE|G
-sql7545214|schema||sql7545214||INDEX|G
-sql7545214|schema||sql7545214||INSERT|G
-sql7545214|schema||sql7545214||LOCK TABLES|G
-sql7545214|schema||sql7545214||SELECT|G
-sql7545214|schema||sql7545214||SHOW VIEW|G
-sql7545214|schema||sql7545214||UPDATE|G</Grants>
+      <Grants>sql7553363|schema||sql7553363||ALTER|G
+sql7553363|schema||sql7553363||ALTER ROUTINE|G
+sql7553363|schema||sql7553363||CREATE|G
+sql7553363|schema||sql7553363||CREATE ROUTINE|G
+sql7553363|schema||sql7553363||CREATE VIEW|G
+sql7553363|schema||sql7553363||DELETE|G
+sql7553363|schema||sql7553363||DROP|G
+sql7553363|schema||sql7553363||EXECUTE|G
+sql7553363|schema||sql7553363||INDEX|G
+sql7553363|schema||sql7553363||INSERT|G
+sql7553363|schema||sql7553363||LOCK TABLES|G
+sql7553363|schema||sql7553363||SELECT|G
+sql7553363|schema||sql7553363||SHOW VIEW|G
+sql7553363|schema||sql7553363||UPDATE|G</Grants>
       <ServerVersion>5.5.62</ServerVersion>
     </root>
     <collation id="2" parent="1" name="armscii8_bin">
@@ -654,11 +654,11 @@ sql7545214|schema||sql7545214||UPDATE|G</Grants>
     <schema id="199" parent="1" name="information_schema">
       <CollationName>utf8_general_ci</CollationName>
     </schema>
-    <schema id="200" parent="1" name="sql7545214">
+    <schema id="200" parent="1" name="sql7553363">
       <Current>1</Current>
       <CollationName>latin1_swedish_ci</CollationName>
     </schema>
-    <user id="201" parent="1" name="sql7545214"/>
+    <user id="201" parent="1" name="sql7553363"/>
     <table id="202" parent="200" name="Charging_Point">
       <Engine>InnoDB</Engine>
       <CollationName>latin1_swedish_ci</CollationName>
@@ -724,16 +724,11 @@ sql7545214|schema||sql7545214||UPDATE|G</Grants>
       <Position>3</Position>
     </column>
     <column id="216" parent="203" name="starting_timestamp">
-      <DataType>timestamp|0s</DataType>
-      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
-      <NotNull>1</NotNull>
-      <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
+      <DataType>datetime|0s</DataType>
       <Position>4</Position>
     </column>
     <column id="217" parent="203" name="fully_charge_timestamp">
-      <DataType>timestamp|0s</DataType>
-      <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
-      <NotNull>1</NotNull>
+      <DataType>datetime|0s</DataType>
       <Position>5</Position>
     </column>
     <foreign-key id="218" parent="203" name="Charging_Process_ibfk_1">

@@ -11,9 +11,9 @@ import java.util.Scanner;
 
 public class Database implements DatabaseInterface{
 
-    static final String DB_URL = "jdbc:mysql://sql7.freesqldatabase.com/sql7545214";
-    static final String USER = "sql7545214";
-    static final String PASS = "EtqbWfmqYa";
+    static final String DB_URL = "jdbc:mysql://sql7.freesqldatabase.com/sql7553363";
+    static final String USER = "sql7553363";
+    static final String PASS = "SQsrAxfgK2";
 
     /**
      * connectToDatabase create a connection and then make their 4 tables
@@ -149,40 +149,32 @@ public class Database implements DatabaseInterface{
         int nbOfLine = pLines.size();      //ini here and not in the for because the value change due to the .poll which remove at each call
         String sqlLine = "";
 
+
         for (int i = 0; i <nbOfLine; i++){
             listContent[i] = Objects.requireNonNull(pLines.pollFirst()).toString().split(",");
 
             //fill the good database
             switch (pNameOfDatabase) {
                 case "E_Car":
-                    sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] + ", '" + listContent[i][1] + "', '" + listContent[i][2] + "', " + UtilTools.dateConverter(listContent[i][3]) + ")";
+                    sqlLine = "INSERT INTO E_Car VALUES (" + listContent[i][0] + ", '" + listContent[i][1] + "', '" + listContent[i][2] + "', '" + UtilTools.dateConverter(listContent[i][3]) + "')";
                     break;
                 case "Charging_Point":
                     sqlLine = "INSERT INTO Charging_Point VALUES (" + listContent[i][0] + ", " + listContent[i][1] + ", " + listContent[i][2] + ", '" + listContent[i][3] + "', '" + listContent[i][4] + "')";
                     break;
                 case "Customer":
-                    sqlLine = "INSERT INTO Customer VALUES (" + listContent[i][0] + ", '" + listContent[i][1] + "', '" + listContent[i][2] + "', " + listContent[i][3] + ",'" + listContent[i][4] + "'," + listContent[i][5] + ", '" + UtilTools.dateConverter(listContent[i][6]) + "' )";
+                    sqlLine = "INSERT INTO Customer VALUES (" + listContent[i][0] + ", '" + listContent[i][1] + "', '" + listContent[i][2] + "', " + listContent[i][3] + ",'" + listContent[i][4] + "'," + listContent[i][5] + ", " + UtilTools.dateConverter(listContent[i][6]) + "," + null + ")";
                     break;
                 case "Charging_Process":
-                    sqlLine = "INSERT INTO Charging_Process VALUES (" + listContent[i][0] + ", " + listContent[i][1] + ", " + listContent[i][2] + "," + UtilTools.timeStampConverter(listContent[i][3]) + "," + UtilTools.timeStampConverter(listContent[i][4]) + ")";
+                    sqlLine = "INSERT INTO Charging_Process VALUES (" + listContent[i][0] + ", " + listContent[i][1] + ", " + listContent[i][2] + "," + UtilTools.timeStampConverter2(listContent[i][3]) + "," + UtilTools.timeStampConverter2(listContent[i][4]) + ")";
                     break;
                 default:
                     System.out.println("unknown name of database");
                     break;
             }//switch
+
             stmt.executeUpdate(sqlLine);
         }//for
     }//writeInDatabase
-
-//    public static boolean isInDatabase(String pString, boolean isString) throws SQLException, ClassNotFoundException {
-//        Statement statement = connectDatabase();
-//        if(!isString){
-//            UtilTools.stringToInt(pString,0);
-//
-//        }else{
-//
-//        }
-//    }//isInDatabase
 
     public static int GetPreviousCarRegistrationNumber() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         Statement stmt = Database.connectDatabase();

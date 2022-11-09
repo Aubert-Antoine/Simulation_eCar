@@ -1,6 +1,4 @@
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
+import org.jetbrains.annotations.NotNull;
 
 import static java.lang.Integer.parseInt;
 
@@ -14,25 +12,43 @@ public class UtilTools {
      * <a href="https://stackoverflow.com/a/14039210">...</a>
      * convert the date dd/mm/yyyy to yyyy-mm-dd
      * @author Antoine Aubert & stackoverflow
-     * @param pDate the date at java.sql.date format -> notice that the result is the same with String format
+     * @param
      * @return
      */
-    public static String dateConverter(String pDate){
-        if(pDate.contains("null")){
+    public static String dateConverter(@NotNull String pDate){
+        try {
+            return "'"+pDate.split("/")[2]+"/"+pDate.split("/")[1]+"/"+pDate.split("/")[0]+"'";
+        }catch (Exception e){
             return null;
-        }else {
-            java.util.Date date = new Date(pDate);
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String format = formatter.format(date);
-
-            return "'"+format+"'"; // fix the bug due to null don't need quote but values need inside sql requests
         }
-    }//dateConverter()
+    }
 
-    public static String timeStampConverter(String pTimeStamp){
-        pTimeStamp=pTimeStamp.replace('.',' ');
-        return dateConverter(pTimeStamp.split(" ")[0]) + " " + pTimeStamp.split(" ")[1];
-    }//timeStampConverter(.)
+    public static  String timeStampConverter(String pDateTime) {
+        pDateTime=pDateTime.replace('.',' ');
+        try {
+            String temp = pDateTime.split("/")[2]+"/"+pDateTime.split("/")[1]+"/"+pDateTime.split("/")[0];
+            System.out.println();
+            String out = "'"+temp.split(" ")[0] + " " + pDateTime.split(" ")[1]+"'";
+            System.out.println(out);
+            return out;
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public static String timeStampConverter2(String pTimeStamp){
+        try {
+            String[] tmp = pTimeStamp.replace('.',' ').split(" "); // split on '.' not work ??
+            String[] date = tmp[0].split("/");
+            String time[] = tmp[1].split(":");
+
+
+            String timeStampFormat = date[2]+date[1]+date[0]+time[0]+time[1]+time[2];
+            return "'"+UtilTools.stringToInt(timeStampFormat,0)+"'";
+        } catch (Exception e){
+            return null;
+        }
+    }//timeStampConverter2
 
     /**
      * currentDirectory return the absolut path of the "Simulation eCar" project.
