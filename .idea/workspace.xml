@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="Git [#3] delete connectionDatabase()">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d6613932-a27b-4334-9be8-e67e7649c684.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/d6613932-a27b-4334-9be8-e67e7649c684.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DBUtil.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ECarsCompany.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECarsCompany.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EChargingPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EChargingPoint.java" afterDir="false" />
@@ -109,7 +107,7 @@
       <workItem from="1668068660241" duration="5605000" />
       <workItem from="1668075600378" duration="2836000" />
       <workItem from="1668078470058" duration="797000" />
-      <workItem from="1668079285428" duration="1119000" />
+      <workItem from="1668079285428" duration="6657000" />
     </task>
     <task id="LOCAL-00001" summary=".csv &amp; .pdf &amp; .jar &amp; DBUtil.java">
       <created>1667591884043</created>
@@ -300,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668075214442</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Git [#3] delete connectionDatabase()">
+      <created>1668080479124</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1668080479124</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -388,10 +393,19 @@
           <properties class="java.util.NoSuchElementException" package="java.util" />
           <option name="timeStamp" value="6" />
         </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.sql.SQLException" package="java.sql" />
+          <option name="timeStamp" value="22" />
+        </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ECarsCompany.java</url>
-          <line>260</line>
-          <option name="timeStamp" value="16" />
+          <line>264</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ECarsCompany.java</url>
+          <line>284</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -34,13 +34,13 @@ public class ECarsCompany {
 //        Database.writeInDatabase(Database.readCSV("customer"), "Customer");
 //        Database.writeInDatabase(Database.readCSV("chargingProcess"), "Charging_Process");
 
-        welcomeMessage();
+//        welcomeMessage();
         chatBox();
     }//main()
 
     public static void welcomeMessage() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         System.out.println(companyName);
-        System.out.println("The number of car is : "+getCarNumber());
+//        System.out.println("The number of car is : "+getCarNumber());
         printNbChargingPoints();
     }
 
@@ -118,6 +118,7 @@ public class ECarsCompany {
             if (!outResultSet.next()) {
                 System.out.println("Unknown ID");
                 chatBox();
+                stmt.close();
                 conn.close();
                 return null;
             } else {
@@ -127,6 +128,7 @@ public class ECarsCompany {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        stmt.close();
         conn.close();
         return customerID;
     }
@@ -136,22 +138,21 @@ public class ECarsCompany {
         Connection conn = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         Statement stmt =  conn.createStatement();
 
+        String fullName, carModel, carColor, carDateService, SQLInsertInBase;
+        int carBatteryLevel, carMillimetre, modelID;
+        ResultSet outResultSet = null;
+
         System.out.println("Give your ID number : ");
         String customerID = (String) UtilTools.scanner(false,0,0);
 
         //check if ID exist
         String SQLQid = String.format("SELECT customer_id FROM Customer WHERE customer_id = %s ", customerID);
 
-
-        ResultSet outResultSet = null;
-        String fullName, carModel, carColor, carDateService;
-        int carBatteryLevel, carMillimetre, modelID;
-
         try {
             outResultSet = stmt.executeQuery(SQLQid);
             System.out.println("Query : "+ SQLQid +"  ->  done..");
 
-            if(outResultSet.getInt(0) != 0 ){ // si = 0 -> SQL null
+            if(outResultSet.next()){ // si = 0 -> SQL null
                 System.out.println("USER already exist");
                 chatBox();
             }else {
@@ -171,28 +172,30 @@ public class ECarsCompany {
                     System.out.println("The model is unknown");
                     option4();
                 } else {
+                    try {
+                        System.out.println("Enter car color : ");
+                        carColor = (String) UtilTools.scanner(false,0,0);
+                        System.out.println("Enter car battery level : ");
+                        carBatteryLevel = (int) UtilTools.scanner(true,0,100);
+                        System.out.println("Enter car last service : ");
+                        carDateService = (String) UtilTools.scanner(false,0,0);
+                        System.out.println("Enter car millimetres : ");
+                        carMillimetre = (int) UtilTools.scanner(true,0,99999999);
 
+                        modelID = modelToModelId(carModel);
+                        SQLInsertInBase = String.format("INSERT INTO Customer(customer_id, full_name, car_registration_number," + " model_id, car_color, car_battery_level, car_last_service, total_millimetres) VALUES (%e,'%s','%s',%e,'%s',%e,%e,%e)",customerID, fullName, Database.GetPreviousCarRegistrationNumber() + 1, modelID, carColor, carBatteryLevel, carDateService, carMillimetre);
 
-                    System.out.println("Enter car color : ");
-                    carColor = (String) UtilTools.scanner(false,0,0);
-                    System.out.println("Enter car battery level : ");
-                    carBatteryLevel = (int) UtilTools.scanner(true,0,100);
-                    System.out.println("Enter car last service : ");
-                    carDateService = (String) UtilTools.scanner(false,0,0);
-                    System.out.println("Enter car millimetres : ");
-                    carMillimetre = (int) UtilTools.scanner(true,0,99999999);
+                    }catch (Exception e){
+                        SQLInsertInBase = String.format("INSERT INTO Customer(customer_id, full_name, car_registration_number," + " model_id, car_color, car_battery_level, car_last_service, total_millimetres) VALUES (%e,'%s','%s')",customerID, fullName, Database.GetPreviousCarRegistrationNumber() + 1);
 
-                    modelID = modelToModelId(carModel);
-
-                    String SQLInsertInBase = String.format("INSERT INTO Customer(customer_id, full_name, car_registration_number," +
-                                    " model_id, car_color, car_battery_level, car_last_service, total_millimetres) VALUES (%e,'%s','%s',%e,'%s',%e,%e,%e)",
-                            customerID, fullName, Database.GetPreviousCarRegistrationNumber() + 1, modelID, carColor, carBatteryLevel, carDateService, carMillimetre);
+                    }
                     stmt.executeUpdate(SQLInsertInBase);
                 }//else
             }//else
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
+            stmt.close();
             conn.close();
         }
 
@@ -234,6 +237,7 @@ public class ECarsCompany {
         System.out.println(ElectricCar.getCarTravelDistance());
         System.out.println("last service date : ");
         System.out.println(ElectricCar.getLastService());
+        System.out.println("\n");
         subChatBox(pID);
     }
 
@@ -262,6 +266,7 @@ public class ECarsCompany {
             System.out.println("Their is not available outlets");
             subChatBox(pID);
         }
+        stmt.close();
         conn.close();
         EChargingPoint.startCharging(pID,intID);
     }// Start_charging
@@ -281,11 +286,12 @@ public class ECarsCompany {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }//catch
-
-        outResultSet.close();
-        conn.close();
-        subChatBox(pCustomerID);
+        }finally {
+            outResultSet.close();
+            stmt.close();
+            conn.close();
+            subChatBox(pCustomerID);
+        }
     }
 
     public static void Logout() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -319,6 +325,7 @@ public class ECarsCompany {
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
+            stmt.close();
             conn.close();
         }
     }//availableEChargerPoints()
@@ -340,12 +347,20 @@ public class ECarsCompany {
         Connection conn = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         Statement stmt =  conn.createStatement();
 
+        int modelID = 0;
+
         ResultSet outResultSet = null;
         String SQLQModelToModelID = String.format("SELECT model_id FROM E_Car WHERE model = '%s'",pModel);
         outResultSet = stmt.executeQuery(SQLQModelToModelID);
-        int modelID = outResultSet.getInt(0);
+        if(outResultSet.next()){
+            modelID = outResultSet.getInt(0);
+        }else {
+            return Integer.parseInt(null);
+        }
+
 
         outResultSet.close();
+        stmt.close();
         conn.close();
         return modelID;
     }
@@ -386,13 +401,14 @@ public class ECarsCompany {
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
+            stmt.close();
             conn.close();
         }
     }//printCarModel
 
 
     public static void printNbChargingPoints() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection conn = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         Statement stmt =  conn.createStatement();
 
@@ -414,16 +430,18 @@ public class ECarsCompany {
             e.printStackTrace();
         }
         outResultSet.close();
+        stmt.close();
         conn.close();
     }//printCarModel
 
-    public static int getCarNumber() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.jdbc.Driver");
+    public static int getCarNumber() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection conn = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         Statement stmt =  conn.createStatement();
 
         ResultSet rs = stmt.executeQuery("SELECT count(*) FROM E_Car");
         rs.next();
+        stmt.close();
         conn.close();
         return rs.getInt(1);
     }

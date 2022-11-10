@@ -13,7 +13,7 @@ public class EChargingPoint {
 
     /**
      * Print the time of start of charging for a specific car
-     * @param pCustomer
+     * @param pCustomerID
      * @param pPointID
      */
     public static void startCharging(int pCustomerID, int pPointID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -54,6 +54,7 @@ public class EChargingPoint {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
+            stmt.close();
             conn.close();
         }
         return pID;
@@ -79,6 +80,7 @@ public class EChargingPoint {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
+            stmt.close();
             conn.close();
         }
     }//updateDatabase

@@ -31,6 +31,7 @@ public class Customer {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
+            stmt.close();
             conn.close();
         }
     }//upDateDatabase

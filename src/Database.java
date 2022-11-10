@@ -89,6 +89,7 @@ public class Database implements DatabaseInterface{
         } catch (SQLException e) {
             e.printStackTrace();
         }//catch
+        stmt.close();
         conn.close();
     }//connectToDatabase()
 
@@ -170,6 +171,7 @@ public class Database implements DatabaseInterface{
 
             stmt.executeUpdate(sqlLine);
         }//for
+        stmt.close();
         conn.close();
     }//writeInDatabase
 
@@ -187,6 +189,7 @@ public class Database implements DatabaseInterface{
         int number = UtilTools.stringToInt(maxRegistrationNumber, 3);
 
         outResultSet.close();
+        stmt.close();
         conn.close();
         return number;
     }
