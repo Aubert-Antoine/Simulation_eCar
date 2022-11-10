@@ -25,7 +25,9 @@ public class Database implements DatabaseInterface{
 
     public static void connectToDatabase() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         // Open a connection
-        Statement stmt = connectDatabase();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        Statement stmt =  conn.createStatement();
 
         try {
             String sql ="CREATE TABLE Charging_Point " +
@@ -87,19 +89,10 @@ public class Database implements DatabaseInterface{
         } catch (SQLException e) {
             e.printStackTrace();
         }//catch
+        conn.close();
     }//connectToDatabase()
 
-    /**
-     * This methode open a connextion to the database
-     * @return
-     * @throws ClassNotFoundException
-     * @throws SQLException
-     */
-    public static Statement connectDatabase() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        return conn.createStatement();
-    }
+
 
 
     /**
@@ -143,7 +136,10 @@ public class Database implements DatabaseInterface{
      */
     public static void writeInDatabase(@NotNull LinkedList pLines, String pNameOfDatabase) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 
-        Statement stmt = connectDatabase();
+
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        Statement stmt =  conn.createStatement();
 
         String[][] listContent = new String[pLines.size()][];
         int nbOfLine = pLines.size();      //ini here and not in the for because the value change due to the .poll which remove at each call
@@ -174,10 +170,14 @@ public class Database implements DatabaseInterface{
 
             stmt.executeUpdate(sqlLine);
         }//for
+        conn.close();
     }//writeInDatabase
 
     public static int GetPreviousCarRegistrationNumber() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        Statement stmt = Database.connectDatabase();
+
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        Statement stmt =  conn.createStatement();
 
 
         ResultSet outResultSet = null;
@@ -187,6 +187,7 @@ public class Database implements DatabaseInterface{
         int number = UtilTools.stringToInt(maxRegistrationNumber, 3);
 
         outResultSet.close();
+        conn.close();
         return number;
     }
 
