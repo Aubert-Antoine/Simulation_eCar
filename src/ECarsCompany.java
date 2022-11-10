@@ -2,12 +2,11 @@ import java.sql.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 
 public class ECarsCompany {
 
-    private static String companyName;
+    private static String companyName = "Company name";
     private static ElectricCar ElecCar;
     private static Map<String, Integer> numberofmodel = new HashMap<String, Integer>();
     private static Customer customer;
@@ -40,35 +39,20 @@ public class ECarsCompany {
 
     public static void welcomeMessage() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         System.out.println(companyName);
-        System.out.println(numberofmodel.toString());
+        System.out.println("The number of car is : "+getCarNumber());
         printNbChargingPoints();
     }
 
 
     public static void chatBox() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("\n\n\n");
+        System.out.println("\n\n");
         System.out.println("1. Show more info about the company.");
         System.out.println("2. Find a charging point");
         System.out.println("3. Login");
         System.out.println("4. Register");
         System.out.println("5. Exit");
 
-        String numberSelected = "-1";
-        int nbSelected = 0;
-
-        try {
-            //handle possible Type Errors
-            while (UtilTools.stringToInt(numberSelected,0) < 1 || UtilTools.stringToInt(numberSelected,0) > 5 ){
-                System.out.println("\nPick a number : ");
-                numberSelected = sc.nextLine();
-            }
-        }catch (Exception e){ e.printStackTrace();}
-        sc.close();
-
-        nbSelected = UtilTools.stringToInt(numberSelected,0);
+        int nbSelected = (int) UtilTools.scanner(true, 1,5);
 
         if (nbSelected == 1) {
             option1();
@@ -93,38 +77,35 @@ public class ECarsCompany {
     }//option1
 
     public static void option2() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter a city in the list : 'Papho', 'Larnaca', 'Limassol', 'Nicosia'");
-        String inputCity = sc.nextLine();
+        String inputCity = (String) UtilTools.scanner(false,0,0);
 
-        while (!inputCity.equals("Papho") || !inputCity.equals("Larnaca") || !inputCity.equals("Limassol") || !inputCity.equals("Nicosia")) {
-            System.out.println("Enter a city in the list <!> : 'Papho', 'Larnaca', 'Limassol', 'Nicosia'");
-            inputCity = sc.nextLine();
-        }
-
-        System.out.println("Show only free outlets ? y - n ");
-        String inputFree = sc.nextLine();
-        while (!inputFree.equals("y") || !inputFree.equals("n")) {
+        if(inputCity.equals("Papho") || inputCity.equals("Larnaca") || inputCity.equals("Limassol") || inputCity.equals("Nicosia")){
             System.out.println("Show only free outlets ? y - n ");
-            inputFree = sc.nextLine();
+            String inputFree = (String) UtilTools.scanner(false,0,0);
+            if(inputFree.equals("y")){
+                availableEChargerPoints(inputCity, true);
+                chatBox();
+            } else if (inputFree.equals("n")) {
+                availableEChargerPoints(inputCity, false);
+                chatBox();
+            }else{
+                option2();
+            }
+        }else{
+            option2();
         }
-        if (inputFree.equals("y")) availableEChargerPoints(inputCity, true);
-        else if (inputFree.equals("n")) availableEChargerPoints(inputCity, true);
-        else System.out.println("bug -- lettre not accepted");
-        sc.close();
-        chatBox();
     }//option2
 
     public static Object option3() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        Scanner sc = new Scanner(System.in);
+
         int customerID = 0;
         boolean isUserExist = false;
         System.out.println("Entre your ID :");
 
         try {
-            customerID = sc.nextInt();
-            sc.close();
+            customerID = (int) UtilTools.scanner(true,0,999999);
 
             Statement stmt = Database.connectDatabase();
 
@@ -146,9 +127,9 @@ public class ECarsCompany {
     }
 
     public static void option4() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println("Give your ID number : ");
-        String customerID = scanner.nextLine();
+        String customerID = (String) UtilTools.scanner(false,0,0);
 
         //check if ID exist
         String SQLQid = String.format("SELECT customer_id FROM Customer WHERE customer_id = %s ", customerID);
@@ -168,36 +149,33 @@ public class ECarsCompany {
                 chatBox();
             }else {
                 System.out.println("Enter your full name : ");
-                fullName = scanner.nextLine();
+                fullName = (String) UtilTools.scanner(false,0,0);
 
                 System.out.println("Enter your car model : ");
-                carModel = scanner.nextLine();
+                carModel = (String) UtilTools.scanner(false,0,0);
 
                 //check if the model exist      <!>
-                String SQLQModel = "";
+                String SQLQModel = "SELECT model_id FROM E_Car WHERE model = '" + carModel+"'";
                 outResultSet = stmt.executeQuery(SQLQModel);
 
-                if (outResultSet.getInt(1) == 0) { // <!> param 1 ?  // == 0 => retour de sql null
+                if (!outResultSet.next()) {
                     System.out.println("The model is unknown");
-                    System.out.println("Enter your car model");
-                    carModel = scanner.nextLine();
+                    option4();
                 } else {
                     System.out.println("Enter car color : ");
-                    carColor = scanner.nextLine();
+                    carColor = (String) UtilTools.scanner(false,0,0);
                     System.out.println("Enter car battery level : ");
-                    carBatteryLevel = scanner.nextInt();
+                    carBatteryLevel = (int) UtilTools.scanner(true,0,100);
                     System.out.println("Enter car last service : ");
-                    carDateService = scanner.nextLine();
+                    carDateService = (String) UtilTools.scanner(false,0,0);
                     System.out.println("Enter car millimetres : ");
-                    carMillimetre = scanner.nextInt();
+                    carMillimetre = (int) UtilTools.scanner(true,0,99999999);
 
                     modelID = modelToModelId(carModel);
 
                     String SQLInsertInBase = String.format("INSERT INTO Customer(customer_id, full_name, car_registration_number," +
                                     " model_id, car_color, car_battery_level, car_last_service, total_millimetres) VALUES (%e,'%s','%s',%e,'%s',%e,%e,%e)",
                             customerID, fullName, Database.GetPreviousCarRegistrationNumber() + 1, modelID, carColor, carBatteryLevel, carDateService, carMillimetre);
-
-                    scanner.close();
                 }//else
             }//else
         } catch (Exception e) {
@@ -220,11 +198,8 @@ public class ECarsCompany {
         System.out.println("c. Complete charging process");
         System.out.println("d. Logout");
 
-        Scanner sc = new Scanner(System.in);
+        String lettreSelected = (String) UtilTools.scanner(false,0,0);
 
-        System.out.println("\nPick a letter : ");
-        String lettreSelected;
-        lettreSelected = sc.nextLine();
 
         if (lettreSelected.equals("a")) {
             Show_car_status(pID);
@@ -235,28 +210,25 @@ public class ECarsCompany {
         } else if (lettreSelected.equals("d")) {
             Logout();
         }
-        sc.close();
     }//subChatBox
 
 
     public static void Show_car_status(int pID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         System.out.println("battery level : ");
-        ElectricCar.getBatteryBalance();
+        System.out.println(ElectricCar.getBatteryBalance());
         System.out.println("total millimetres : ");
-        ElectricCar.getCarTravelDistance();
+        System.out.println(ElectricCar.getCarTravelDistance());
         System.out.println("last service date : ");
-        ElectricCar.getLastService();
+        System.out.println(ElectricCar.getLastService());
         subChatBox(pID);
     }
 
     public static void Start_charging(int pID) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        Scanner scanner = new Scanner(System.in);
         ResultSet outResultSet = null;
         Statement stmt = Database.connectDatabase();
 
         System.out.println("Enter the charging’s point id.");
-        int intID = scanner.nextInt();
-        scanner.close();
+        int intID = (int) UtilTools.scanner(true,0,999999);
 
         // check is the id is valid
         String SQL = "SELECT count(*) FROM Charging_Point WHERE point_id = "+intID;
@@ -412,4 +384,12 @@ public class ECarsCompany {
         }
         outResultSet.close();
     }//printCarModel
+
+    public static int getCarNumber() throws SQLException, ClassNotFoundException {
+        Statement stmt = Database.connectDatabase();
+        ResultSet rs = stmt.executeQuery("SELECT count(*) FROM E_Car");
+        rs.next();
+        return rs.getInt(1);
+    }
+
 }//class

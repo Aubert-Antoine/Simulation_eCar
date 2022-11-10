@@ -11,9 +11,9 @@ import java.util.Scanner;
 
 public class Database implements DatabaseInterface{
 
-    static final String DB_URL = "jdbc:mysql://sql7.freesqldatabase.com/sql7553363";
-    static final String USER = "sql7553363";
-    static final String PASS = "SQsrAxfgK2";
+    static final String DB_URL = "jdbc:mysql://sql7.freesqldatabase.com/sql7557804";
+    static final String USER = "sql7557804";
+    static final String PASS = "SljGiCuAPm";
 
     /**
      * connectToDatabase create a connection and then make their 4 tables
@@ -189,5 +189,7 @@ public class Database implements DatabaseInterface{
         outResultSet.close();
         return number;
     }
+
+
 }//class
 
