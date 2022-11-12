@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="Git [#3] delete connectionDatabase()">
+    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="Git [#4] fex bugs for scenarios">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ECarsCompany.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECarsCompany.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EChargingPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EChargingPoint.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,32 +41,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ToolWindowRun.ShowToolbar": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/antoi/Desktop/perso_moi/travail/E3/JAVA/Elecctric_cars",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/antoi/Desktop/perso_moi/travail/E3/JAVA/Elecctric_cars&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.uml&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\antoi\IdeaProjects\Simulation eCar\src\Diagram" />
@@ -107,7 +105,11 @@
       <workItem from="1668068660241" duration="5605000" />
       <workItem from="1668075600378" duration="2836000" />
       <workItem from="1668078470058" duration="797000" />
-      <workItem from="1668079285428" duration="6657000" />
+      <workItem from="1668079285428" duration="7235000" />
+      <workItem from="1668100491966" duration="160000" />
+      <workItem from="1668102827977" duration="31000" />
+      <workItem from="1668209152024" duration="1430000" />
+      <workItem from="1668262423373" duration="10617000" />
     </task>
     <task id="LOCAL-00001" summary=".csv &amp; .pdf &amp; .jar &amp; DBUtil.java">
       <created>1667591884043</created>
@@ -305,7 +307,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668080479124</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Git [#4] fex bugs for scenarios">
+      <created>1668086541925</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1668086541925</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,7 +360,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value=".csv &amp; .pdf &amp; .jar &amp; DBUtil.java" />
     <MESSAGE value="Unversioned Files" />
     <MESSAGE value="Main.java Class &amp; compilation ok \ execution prb SQL" />
     <MESSAGE value="version 4 tables" />
@@ -376,7 +384,8 @@
     <MESSAGE value="Git [#1]" />
     <MESSAGE value="Git [#2] Scanner &amp; subclass ok" />
     <MESSAGE value="Git [#3] delete connectionDatabase()" />
-    <option name="LAST_COMMIT_MESSAGE" value="Git [#3] delete connectionDatabase()" />
+    <MESSAGE value="Git [#4] fex bugs for scenarios" />
+    <option name="LAST_COMMIT_MESSAGE" value="Git [#4] fex bugs for scenarios" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -397,18 +406,25 @@
           <properties class="java.sql.SQLException" package="java.sql" />
           <option name="timeStamp" value="22" />
         </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.util.IllegalFormatConversionException" package="java.util" />
+          <option name="timeStamp" value="37" />
+        </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ECarsCompany.java</url>
-          <line>264</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ECarsCompany.java</url>
-          <line>284</line>
-          <option name="timeStamp" value="20" />
+          <line>193</line>
+          <option name="timeStamp" value="39" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="outResultSet.next()" language="JAVA" />
+      </configuration>
+      <inline-watch fileUrl="file://$PROJECT_DIR$/src/ECarsCompany.java" line="199">
+        <watch expression="e" language="JAVA" />
+      </inline-watch>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

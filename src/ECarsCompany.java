@@ -12,6 +12,8 @@ public class ECarsCompany {
     private static Map<String, Integer> numberofmodel = new HashMap<String, Integer>();
     private static Customer customer;
 
+    public static boolean debug = false;
+
     public ECarsCompany(String pCompanyName, ElectricCar pElectricCar, Map<String, Integer> pNbCarOwnByCompany, Customer pCustomer) {
         super();
         this.companyName = pCompanyName;
@@ -34,7 +36,9 @@ public class ECarsCompany {
 //        Database.writeInDatabase(Database.readCSV("customer"), "Customer");
 //        Database.writeInDatabase(Database.readCSV("chargingProcess"), "Charging_Process");
 
-//        welcomeMessage();
+        System.out.println(Database.GetPreviousCarRegistrationNumber());
+
+        welcomeMessage();
         chatBox();
     }//main()
 
@@ -138,15 +142,15 @@ public class ECarsCompany {
         Connection conn = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         Statement stmt =  conn.createStatement();
 
-        String fullName, carModel, carColor, carDateService, SQLInsertInBase;
+        String fullName, carModel, carColor, carDateService, SQLInsertInBase = null;
         int carBatteryLevel, carMillimetre, modelID;
         ResultSet outResultSet = null;
 
         System.out.println("Give your ID number : ");
-        String customerID = (String) UtilTools.scanner(false,0,0);
+        int customerID = (int) UtilTools.scanner(true,0,999999);
 
         //check if ID exist
-        String SQLQid = String.format("SELECT customer_id FROM Customer WHERE customer_id = %s ", customerID);
+        String SQLQid = String.format("SELECT customer_id FROM Customer WHERE customer_id = %d ", customerID);
 
         try {
             outResultSet = stmt.executeQuery(SQLQid);
@@ -183,24 +187,35 @@ public class ECarsCompany {
                         carMillimetre = (int) UtilTools.scanner(true,0,99999999);
 
                         modelID = modelToModelId(carModel);
-                        SQLInsertInBase = String.format("INSERT INTO Customer(customer_id, full_name, car_registration_number," + " model_id, car_color, car_battery_level, car_last_service, total_millimetres) VALUES (%e,'%s','%s',%e,'%s',%e,%e,%e)",customerID, fullName, Database.GetPreviousCarRegistrationNumber() + 1, modelID, carColor, carBatteryLevel, carDateService, carMillimetre);
+                        try {
+                            String newstr = String.format("BCD %e",Database.GetPreviousCarRegistrationNumber() + 1);
+//                            SQLInsertInBase = String.format("INSERT INTO Customer(customer_id, full_name, car_registration_number, model_id, car_color, car_battery_level, car_last_service, total_millimetres) VALUES (%d,'%s','%s',%d,'%s',%d,%d,%d)",customerID, fullName, newstr, modelID, carColor, carBatteryLevel, null, carMillimetre);
+                            SQLInsertInBase = "INSERT INTO Customer(customer_id, full_name, car_registration_number, model_id, car_color, car_battery_level, car_last_service, total_millimetres) VALUES (null,null,null,null,null,null,null,null)";
+                            System.out.println(SQLInsertInBase);
+                        }catch (Exception e){
+                            System.out.println("inesert sql bug");
+                            e.printStackTrace();
+                        }
 
                     }catch (Exception e){
-                        SQLInsertInBase = String.format("INSERT INTO Customer(customer_id, full_name, car_registration_number," + " model_id, car_color, car_battery_level, car_last_service, total_millimetres) VALUES (%e,'%s','%s')",customerID, fullName, Database.GetPreviousCarRegistrationNumber() + 1);
-
+                        System.out.println("sql insert line buf");
+                        e.printStackTrace();
+                        SQLInsertInBase = String.format("INSERT INTO Customer(customer_id, full_name, car_registration_number," + " model_id, car_color, car_battery_level, car_last_service, total_millimetres) VALUES (%d,'%s','%s')",customerID, fullName, String.format("BCD %e",Database.GetPreviousCarRegistrationNumber() + 1));
                     }
-                    stmt.executeUpdate(SQLInsertInBase);
+
                 }//else
             }//else
         } catch (Exception e) {
+            System.out.println("catch 2");
             e.printStackTrace();
         }finally {
             stmt.close();
             conn.close();
-        }
+            outResultSet.close();
 
-        outResultSet.close();
-        chatBox();
+            stmt.executeUpdate(SQLInsertInBase);
+            chatBox();
+        }
     }//option4
 
     public static void option5() {
@@ -343,27 +358,34 @@ public class ECarsCompany {
      * @return
      */
     public static int modelToModelId(String pModel) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection conn = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         Statement stmt =  conn.createStatement();
 
         int modelID = 0;
-
         ResultSet outResultSet = null;
         String SQLQModelToModelID = String.format("SELECT model_id FROM E_Car WHERE model = '%s'",pModel);
-        outResultSet = stmt.executeQuery(SQLQModelToModelID);
-        if(outResultSet.next()){
-            modelID = outResultSet.getInt(0);
-        }else {
-            return Integer.parseInt(null);
+
+        try {
+            outResultSet = stmt.executeQuery(SQLQModelToModelID);
+            if(outResultSet.next()){
+                modelID = outResultSet.getInt(1);
+                if(debug) System.out.println(modelID + " This is model id");
+            }else {
+                return -1;
+            }
+        }catch (Exception e){
+            if(debug) System.out.println("Catch");
+            e.printStackTrace();
+        }finally {
+            if(debug) System.out.println("finally");
+            outResultSet.close();
+            stmt.close();
+            conn.close();
+            if(debug) System.out.println(modelID);
+            return modelID;
         }
-
-
-        outResultSet.close();
-        stmt.close();
-        conn.close();
-        return modelID;
-    }
+    }//modelToModelId()
 
     /**
      * Print tous les model de voiture et ses attributs dans l'ordre alphabetique vis a vis du nom dui model.

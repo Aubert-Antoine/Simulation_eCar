@@ -177,21 +177,31 @@ public class Database implements DatabaseInterface{
 
     public static int GetPreviousCarRegistrationNumber() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection conn = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         Statement stmt =  conn.createStatement();
 
-
+        int number = 0;
         ResultSet outResultSet = null;
         String SQLQModelToModelID = "SELECT MAX(car_registration_number) FROM Customer";
-        outResultSet = stmt.executeQuery(SQLQModelToModelID);
-        String maxRegistrationNumber = outResultSet.getString(0);
-        int number = UtilTools.stringToInt(maxRegistrationNumber, 3);
 
-        outResultSet.close();
-        stmt.close();
-        conn.close();
-        return number;
+        outResultSet = stmt.executeQuery(SQLQModelToModelID);
+
+        try {
+            if(outResultSet.next()){
+                String maxRegistrationNumber = outResultSet.getString(1);
+                number = UtilTools.stringToInt(maxRegistrationNumber, 3);
+            }else {
+                System.out.println("outResultSet.next() == false ");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            outResultSet.close();
+            stmt.close();
+            conn.close();
+            return number;
+        }
     }
 
 
