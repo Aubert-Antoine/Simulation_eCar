@@ -11,9 +11,9 @@ import java.util.Scanner;
 
 public class Database implements DatabaseInterface{
 
-    static final String DB_URL = "jdbc:mysql://sql7.freesqldatabase.com/sql7553363";
-    static final String USER = "sql7553363";
-    static final String PASS = "SQsrAxfgK2";
+    static final String DB_URL = "jdbc:mysql://sql7.freesqldatabase.com/sql7557804";
+    static final String USER = "sql7557804";
+    static final String PASS = "SljGiCuAPm";
 
     /**
      * connectToDatabase create a connection and then make their 4 tables
@@ -25,7 +25,9 @@ public class Database implements DatabaseInterface{
 
     public static void connectToDatabase() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         // Open a connection
-        Statement stmt = connectDatabase();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        Statement stmt =  conn.createStatement();
 
         try {
             String sql ="CREATE TABLE Charging_Point " +
@@ -87,19 +89,11 @@ public class Database implements DatabaseInterface{
         } catch (SQLException e) {
             e.printStackTrace();
         }//catch
+        stmt.close();
+        conn.close();
     }//connectToDatabase()
 
-    /**
-     * This methode open a connextion to the database
-     * @return
-     * @throws ClassNotFoundException
-     * @throws SQLException
-     */
-    public static Statement connectDatabase() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        return conn.createStatement();
-    }
+
 
 
     /**
@@ -143,7 +137,10 @@ public class Database implements DatabaseInterface{
      */
     public static void writeInDatabase(@NotNull LinkedList pLines, String pNameOfDatabase) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
 
-        Statement stmt = connectDatabase();
+
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        Statement stmt =  conn.createStatement();
 
         String[][] listContent = new String[pLines.size()][];
         int nbOfLine = pLines.size();      //ini here and not in the for because the value change due to the .poll which remove at each call
@@ -174,20 +171,39 @@ public class Database implements DatabaseInterface{
 
             stmt.executeUpdate(sqlLine);
         }//for
+        stmt.close();
+        conn.close();
     }//writeInDatabase
 
     public static int GetPreviousCarRegistrationNumber() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        Statement stmt = Database.connectDatabase();
 
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Connection conn = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        Statement stmt =  conn.createStatement();
 
+        int number = 0;
         ResultSet outResultSet = null;
         String SQLQModelToModelID = "SELECT MAX(car_registration_number) FROM Customer";
-        outResultSet = stmt.executeQuery(SQLQModelToModelID);
-        String maxRegistrationNumber = outResultSet.getString(0);
-        int number = UtilTools.stringToInt(maxRegistrationNumber, 3);
 
-        outResultSet.close();
-        return number;
+        outResultSet = stmt.executeQuery(SQLQModelToModelID);
+
+        try {
+            if(outResultSet.next()){
+                String maxRegistrationNumber = outResultSet.getString(1);
+                number = UtilTools.stringToInt(maxRegistrationNumber, 3);
+            }else {
+                System.out.println("outResultSet.next() == false ");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            outResultSet.close();
+            stmt.close();
+            conn.close();
+            return number;
+        }
     }
+
+
 }//class
 

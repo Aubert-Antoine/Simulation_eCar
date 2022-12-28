@@ -18,7 +18,9 @@ public class Customer {
         this.carRegistrationNumber = pCarRegistrationNumber;
     }
     public void upDateDatabase(Customer pCustomer) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        Statement stmt = Database.connectDatabase();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        Statement stmt =  conn.createStatement();
 
         String pUpdate = String.format("UPDATE Customer SET full_name = %s , car_registration_number = %s , model_id = %s , car_color = %s , car_battery_level = %s , car_last_service = %s , total_millimetres = %s WHERE customer_id = %s"
                 , this.fullName, this.carRegistrationNumber, this.eCar.getModel_ID(), this.eCar.getCarColor(), this.eCar.getBatteryBalance(), this.eCar.getLastService(), this.eCar.getCarTravelDistance(), pCustomer.ID);
@@ -28,8 +30,11 @@ public class Customer {
             System.out.println("Query : "+ pUpdate +"  ->  done..");
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            stmt.close();
+            conn.close();
         }
-    }
+    }//upDateDatabase
 
     public ElectricCar geteCar() {
         return eCar;

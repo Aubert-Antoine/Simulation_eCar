@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="table db customer ok">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d6613932-a27b-4334-9be8-e67e7649c684.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/d6613932-a27b-4334-9be8-e67e7649c684.xml" afterDir="false" />
+    <list default="true" id="e5a39536-ad4c-4784-898a-434921b2f5a1" name="Changes" comment="Git [#4] fex bugs for scenarios">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ECarsCompany.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECarsCompany.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csv/chargePoints.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/chargePoints.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +20,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -49,6 +52,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/antoi/Desktop/perso_moi/travail/E3/JAVA/Elecctric_cars&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
@@ -63,6 +67,11 @@
     ]
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\antoi\IdeaProjects\Simulation eCar\src\Diagram" />
+    </key>
+  </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="main" />
@@ -92,7 +101,15 @@
       <workItem from="1667805297770" duration="14903000" />
       <workItem from="1667891036883" duration="15857000" />
       <workItem from="1667930370581" duration="12711000" />
-      <workItem from="1667978067820" duration="7471000" />
+      <workItem from="1667978067820" duration="10014000" />
+      <workItem from="1668068660241" duration="5605000" />
+      <workItem from="1668075600378" duration="2836000" />
+      <workItem from="1668078470058" duration="797000" />
+      <workItem from="1668079285428" duration="7235000" />
+      <workItem from="1668100491966" duration="160000" />
+      <workItem from="1668102827977" duration="31000" />
+      <workItem from="1668209152024" duration="1430000" />
+      <workItem from="1668262423373" duration="10617000" />
     </task>
     <task id="LOCAL-00001" summary=".csv &amp; .pdf &amp; .jar &amp; DBUtil.java">
       <created>1667591884043</created>
@@ -248,7 +265,56 @@
       <option name="project" value="LOCAL" />
       <updated>1668012817310</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="table ok [#1]">
+      <created>1668015881327</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1668015881327</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Git [#1]">
+      <created>1668017496741</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1668017496741</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Git [#1]">
+      <created>1668017525670</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1668017525670</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Git [#1]">
+      <created>1668017597656</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1668017597656</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Git [#2] Scanner &amp; subclass ok">
+      <created>1668075214442</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1668075214442</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Git [#3] delete connectionDatabase()">
+      <created>1668080479124</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1668080479124</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Git [#4] fex bugs for scenarios">
+      <created>1668086541925</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1668086541925</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,7 +325,34 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="final" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="final" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
@@ -267,7 +360,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value=".csv &amp; .pdf &amp; .jar &amp; DBUtil.java" />
     <MESSAGE value="Unversioned Files" />
     <MESSAGE value="Main.java Class &amp; compilation ok \ execution prb SQL" />
     <MESSAGE value="version 4 tables" />
@@ -288,7 +380,12 @@
     <MESSAGE value="Class Main deleted &amp; new Class UtilTools" />
     <MESSAGE value="Some patch due to the last modifs" />
     <MESSAGE value="table db customer ok" />
-    <option name="LAST_COMMIT_MESSAGE" value="table db customer ok" />
+    <MESSAGE value="table ok [#1]" />
+    <MESSAGE value="Git [#1]" />
+    <MESSAGE value="Git [#2] Scanner &amp; subclass ok" />
+    <MESSAGE value="Git [#3] delete connectionDatabase()" />
+    <MESSAGE value="Git [#4] fex bugs for scenarios" />
+    <option name="LAST_COMMIT_MESSAGE" value="Git [#4] fex bugs for scenarios" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -305,8 +402,29 @@
           <properties class="java.util.NoSuchElementException" package="java.util" />
           <option name="timeStamp" value="6" />
         </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.sql.SQLException" package="java.sql" />
+          <option name="timeStamp" value="22" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.util.IllegalFormatConversionException" package="java.util" />
+          <option name="timeStamp" value="37" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ECarsCompany.java</url>
+          <line>193</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="outResultSet.next()" language="JAVA" />
+      </configuration>
+      <inline-watch fileUrl="file://$PROJECT_DIR$/src/ECarsCompany.java" line="199">
+        <watch expression="e" language="JAVA" />
+      </inline-watch>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

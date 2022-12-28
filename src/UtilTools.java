@@ -1,4 +1,7 @@
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
@@ -77,7 +80,48 @@ public class UtilTools {
     }//stringToInt
 
 
+    /**
+     * This methode is like a scanner, but handle type errors, is able to check a range and can return int or String
+     * @author Antoine Aubert
+     * @param isInt define the return type
+     * @param pRangeMin min of the range to check
+     * @param pRangeMax max of the range to check
+     * @return an object (int or String) written in the prompt / should never return null
+     */
+    public static java.lang.@Nullable Object scanner(boolean isInt, int pRangeMin, int pRangeMax) {
+        Scanner scanner = new Scanner(System.in);
+        int outInt;
+        String outStr = "";
 
+        if (isInt) {
+            try {
+                System.out.println("Pick a number : ");
+                outInt = scanner.nextInt();
+                while (outInt < pRangeMin || outInt > pRangeMax) {
+                    System.out.println("Pick a number in the range <!> : ");
+                    outInt = scanner.nextInt();
+                }
+                return outInt;
+            } catch (Exception e) {
+                System.out.println("Enter an Int");
+                scanner(isInt, pRangeMin, pRangeMax);
+            }
+        } else {
+            try {
+                System.out.println("write something : ");
+                outStr = scanner.nextLine();
+                while (outStr.isEmpty()){
+                    System.out.println("Insert content");
+                    outStr = scanner.nextLine();
+                }
+                return outStr;
+            } catch (Exception e) {
+                System.out.println("Enter an String <!>");
+                scanner(isInt, pRangeMin, pRangeMax);
+            }//catch
+        }//else
+        return null; //this case should never appear
+    }//scanner()
 
 }//UtilTools
 
